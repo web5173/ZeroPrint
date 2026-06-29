@@ -83,14 +83,17 @@
         .content-scroll::-webkit-scrollbar {
             width: 6px;
         }
+
         .content-scroll::-webkit-scrollbar-track {
             background: #f2f2f2;
             border-radius: 4px;
         }
+
         .content-scroll::-webkit-scrollbar-thumb {
             background: #d2d2d2;
             border-radius: 4px;
         }
+
         .content-scroll::-webkit-scrollbar-thumb:hover {
             background: #b8b8b8;
         }
@@ -316,9 +319,11 @@
             width: 5px;
             height: 5px;
         }
+
         .result-content::-webkit-scrollbar-track {
             background: #2c2c2c;
         }
+
         .result-content::-webkit-scrollbar-thumb {
             background: #636363;
             border-radius: 4px;
@@ -327,9 +332,11 @@
         .status-success {
             color: #16baaa;
         }
+
         .status-error {
             color: #ff5722;
         }
+
         .status-info {
             color: #5bc0de;
         }
@@ -339,9 +346,11 @@
             .form-grid-4 {
                 grid-template-columns: repeat(2, 1fr);
             }
+
             .form-grid-2 {
                 grid-template-columns: 1fr 1fr;
             }
+
             .app {
                 height: calc(100vh - 30px);
             }
@@ -351,33 +360,42 @@
             body {
                 padding: 10px;
             }
+
             .app {
                 height: calc(100vh - 20px);
                 border-radius: 4px;
             }
+
             .header {
                 padding: 14px 16px 10px 16px;
             }
+
             .content-scroll {
                 padding: 14px 16px 20px;
             }
+
             .form-grid-4,
             .form-grid-2 {
                 grid-template-columns: 1fr;
             }
+
             .product-name {
                 font-size: 20px;
             }
+
             .slogan {
                 font-size: 13px;
             }
+
             .radio-group {
                 gap: 12px;
             }
+
             .button-group {
                 flex-direction: column;
                 align-items: stretch;
             }
+
             button {
                 justify-content: center;
             }
@@ -388,14 +406,14 @@
 <body>
 
     <div class="app">
-        <!-- 头部：ZeroPrint + 广告语 + 支持格式 -->
         <div class="header">
             <span class="product-name">Zero<span class="highlight">Print</span></span>
-            <span class="slogan">端到端加密打印，零存储 · 零泄露 · 只中继</span>
-            <div class="format-hint">支持文档格式：pdf、docx、doc、xlsx、xls、pptx、ppt、odt、ods、odp、jpg、jpeg、png、gif、bmp、tif、tiff、webp、svg、heic、heif、avif、jxl、html、htm、xps</div>
+            <span class="slogan">端到端加密打印，零信任架构 · 零内容存储 · 只加密中转</span>
+            <div class="format-hint">
+                支持文档格式：pdf、docx、doc、xlsx、xls、pptx、ppt、odt、ods、odp、jpg、jpeg、png、gif、bmp、tif、tiff、webp、svg、heic、heif、avif、jxl、html、htm、xps
+            </div>
         </div>
 
-        <!-- 可滚动内容区域 -->
         <div class="content-scroll">
             <!-- 基本参数 -->
             <div class="section">
@@ -453,7 +471,8 @@
 
             <!-- 公钥 -->
             <div class="section">
-                <div class="section-title"><span>🔐</span> 公钥 <span style="font-weight:400; font-size:12px; color:#999;">（仅加密模式需要）</span></div>
+                <div class="section-title"><span>🔐</span> 公钥 <span
+                        style="font-weight:400; font-size:12px; color:#999;">（仅加密模式需要）</span></div>
                 <div class="form-grid-4" style="grid-template-columns: 1fr;">
                     <div class="form-group full-width">
                         <label>公钥</label>
