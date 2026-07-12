@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Playground — ZeroPrint</title>
+<meta name="description" content="How to test ZeroPrint print API? Use the online debug tool to enter your API endpoint, printer ID, and file URL with optional end-to-end encryption.">
+<meta property="og:title" content="Playground — ZeroPrint">
+<meta property="og:description" content="How to test ZeroPrint print API? Use the online debug tool to enter your API endpoint, printer ID, and file URL with optional end-to-end encryption.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://webappprint.com/playground.html">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="ZeroPrint">
+<meta name="keywords" content="ZeroPrint playground,online print test,print API debug,HTTP print testing,PrintNode alternative">
+<link rel="canonical" href="https://webappprint.com/playground.html">
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","name":"Playground — ZeroPrint","url":"https://webappprint.com/playground.html","description":"How to test ZeroPrint print API? Use the online debug tool to enter your API endpoint, printer ID, and file URL with optional end-to-end encryption.","isPartOf":{"@type":"SoftwareApplication","name":"ZeroPrint","url":"https://webappprint.com/"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"ZeroPrint Playground","url":"https://webappprint.com/playground.html","description":"How to test ZeroPrint print API? Use the online debug tool to enter your API endpoint, printer ID, and file URL with optional end-to-end encryption.","applicationCategory":"DeveloperApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+</script>
+<style>
+.pg-card{padding:0;margin-bottom:32px}
+.pg-card-title{font-family:var(--font-en);font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin-bottom:12px;padding-top:2px}
+.pg-grid{display:grid;gap:10px}
+.pg-grid-2{grid-template-columns:1fr 1fr}
+.pg-grid-4{grid-template-columns:repeat(4,1fr)}
+.pg-field{display:flex;flex-direction:column;gap:3px;min-width:0}
+.pg-field label{font-family:var(--font-en);font-size:12px;font-weight:600;color:var(--ink)}
+.pg-field input,.pg-field textarea{font-family:var(--font-mono);font-size:13px;padding:0 10px;height:36px;border:1px solid var(--border);border-radius:var(--radius);background:var(--bg);color:var(--ink);transition:border-color .2s,box-shadow .2s;width:100%;outline:none}
+.pg-field textarea{height:auto;min-height:80px;padding:6px 10px;resize:vertical;line-height:1.5}
+.pg-field input:focus,.pg-field textarea:focus{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent-soft)}
+.pg-actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:10px 0 14px}
+.pg-result{display:flex;flex-direction:column;gap:10px}
+.pg-result-label{font-family:var(--font-en);font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);display:flex;align-items:center;gap:8px}
+.pg-status{font-size:11px;font-weight:600;padding:1px 7px;border-radius:3px;letter-spacing:.02em;text-transform:none}
+.pg-status.ok{background:rgba(22,186,170,.15);color:var(--accent)}
+.pg-status.err{background:rgba(230,108,0,.15);color:#c55a00}
+.pg-status.info{background:var(--bg-alt);color:var(--ink-3)}
+.pg-code{background:var(--code-bg);color:var(--code-text);border-radius:6px;padding:10px 12px;font-family:var(--font-mono);font-size:12px;line-height:1.55;overflow:auto;white-space:pre-wrap;word-break:break-all;max-height:180px;min-height:24px;margin:0}
+.pg-code.empty{color:#6b6b70;font-style:italic}
+@media(max-width:768px){.pg-grid-4{grid-template-columns:1fr 1fr}.pg-card{padding:0;margin-bottom:14px}}
+@media(max-width:480px){.pg-grid-2,.pg-grid-4{grid-template-columns:1fr}.pg-actions .btn{width:100%;justify-content:center}}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav"><div class="nav-inner">
+<a href="index.html" class="nav-logo">Zero<span>Print</span></a>
+<button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+<ul class="nav-links" id="navLinks">
+<li><a href="index.html">Home</a></li>
+<li><a href="docs.html">API Docs</a></li>
+<li><a href="playground.html" class="active">Playground</a></li>
+<li><a href="download.html">Client Download</a></li>
+<li><a href="pricing.html">Pricing</a></li>
+<li><a href="contact.html">Contact</a></li>
+</ul>
+</div></nav>
+
+<main><section class="section" style="padding:24px 0 32px;"><div class="container">
+
+
+<div class="pg-card fade-up">
+<div class="pg-grid" style="gap:10px;">
+<div class="pg-field"><label for="apiEndpoint">Api Endpoint <span style="color:#ff5722">*</span></label><input type="text" id="apiEndpoint" value="https://print.pockethost.io" placeholder="Copy from client" autocomplete="off" spellcheck="false"></div>
+<div class="pg-grid pg-grid-2" style="gap:10px;">
+<div class="pg-field"><label for="printerId">Printer ID <span style="color:#ff5722">*</span></label><input type="text" id="printerId" placeholder="Copy from client" autocomplete="off" spellcheck="false"></div>
+<div class="pg-field"><label for="fileUrl">File URL <span style="color:#ff5722">*</span></label><input type="text" id="fileUrl" placeholder="https://example.com/document.pdf" autocomplete="off" spellcheck="false"></div>
+</div>
+</div>
+</div>
+
+<div class="pg-card fade-up">
+<div class="pg-grid pg-grid-4" style="gap:10px;">
+<div class="pg-field"><label for="copies">Copies</label><input type="text" id="copies" placeholder="Default: 1" autocomplete="off" spellcheck="false"></div>
+<div class="pg-field"><label for="pageSize">Page Size</label><input type="text" id="pageSize" placeholder="Copy from client" autocomplete="off" spellcheck="false"></div>
+<div class="pg-field"><label for="duplex">Duplex</label><input type="text" id="duplex" placeholder="Copy from client" autocomplete="off" spellcheck="false"></div>
+<div class="pg-field"><label for="color">Color</label><input type="text" id="color" placeholder="Copy from client" autocomplete="off" spellcheck="false"></div>
+<div class="pg-field"><label for="orientation">Orientation</label><input type="text" id="orientation" placeholder="Copy from client" autocomplete="off" spellcheck="false"></div>
+<div class="pg-field"><label for="resolution">Resolution</label><input type="text" id="resolution" placeholder="Copy from client" autocomplete="off" spellcheck="false"></div>
+<div class="pg-field"><label for="taskId">Task ID</label><input type="text" id="taskId" placeholder="Optional" autocomplete="off" spellcheck="false"></div>
+<div class="pg-field"><label for="callbackUrl">Callback URL</label><input type="text" id="callbackUrl" placeholder="Optional" autocomplete="off" spellcheck="false"></div>
+</div>
+</div>
+
+<div class="pg-card fade-up">
+<div class="pg-field"><label for="publicKey">Public Key</label><textarea id="publicKey" placeholder="Copy from client" spellcheck="false" rows="4"></textarea></div>
+</div>
+
+<div class="pg-actions fade-up">
+<button class="btn btn-accent" id="sendBtn">Send Print Request</button>
+<button class="btn btn-secondary" id="previewBtn">Preview Data</button>
+</div>
+
+<div class="pg-result fade-up">
+<div><div class="pg-result-label">Request Body<span class="pg-status info" id="reqStatus" style="display:none;"></span></div><pre class="pg-code empty" id="reqBody">// Request body will appear here</pre></div>
+<div><div class="pg-result-label">Response<span class="pg-status info" id="resStatus">waiting</span></div><pre class="pg-code empty" id="resBody">// Response will appear here after sending</pre></div>
+</div>
+
+</div></section></main>
+
+<footer><div class="footer-inner">
+<span>&copy; 2026 ZeroPrint</span>
+<div class="footer-links"><a href="privacy.html">Privacy Policy</a><a href="contact.html">Contact</a></div>
+</div></footer>
+
+<script>
+const obs=new IntersectionObserver((e)=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('visible');obs.unobserve(x.target);}});},{threshold:.1});
+document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
+window.addEventListener('scroll',()=>{document.getElementById('nav').classList.toggle('scrolled',window.scrollY>10);});
+document.getElementById('navToggle').addEventListener('click',()=>{document.getElementById('navLinks').classList.toggle('open');});
+
+async function encryptData(publicKey,plaintext){
+  const publicKeyBytes=Uint8Array.from(atob(publicKey),c=>c.charCodeAt(0));
+  const publicKeyObj=await crypto.subtle.importKey("spki",publicKeyBytes,{name:"RSA-OAEP",hash:"SHA-256"},true,["encrypt"]);
+  const aesKey=await crypto.subtle.generateKey({name:"AES-GCM",length:256},true,["encrypt"]);
+  const nonce=crypto.getRandomValues(new Uint8Array(12));
+  const data=new TextEncoder().encode(plaintext);
+  const ciphertext=new Uint8Array(await crypto.subtle.encrypt({name:"AES-GCM",iv:nonce},aesKey,data));
+  const aesKeyBytes=new Uint8Array(await crypto.subtle.exportKey("raw",aesKey));
+  const encryptedAesKey=new Uint8Array(await crypto.subtle.encrypt({name:"RSA-OAEP",hash:"SHA-256"},publicKeyObj,aesKeyBytes));
+  const combined=new Uint8Array(encryptedAesKey.length+nonce.length+ciphertext.length);
+  combined.set(encryptedAesKey,0);combined.set(nonce,encryptedAesKey.length);combined.set(ciphertext,encryptedAesKey.length+nonce.length);
+  return btoa(String.fromCharCode(...combined));
+}
+
+async function sendPrintRequest(baseUrl,target,printData,publicKey){
+  const plaintext=JSON.stringify(printData);
+  const data=publicKey?await encryptData(publicKey,plaintext):plaintext;
+  const response=await fetch(baseUrl+"/api/print",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({target,data})});
+  if(!response.ok)throw await response.json();
+  return{status:"success"};
+}
+
+const $=id=>document.getElementById(id);
+const reqBodyEl=$('reqBody'),resBodyEl=$('resBody'),reqStatusEl=$('reqStatus'),resStatusEl=$('resStatus');
+
+function buildPrintData(){
+  const data={url:$('fileUrl').value.trim()};
+  const copies=$('copies').value.trim();if(copies)data.copies=parseInt(copies,10);
+  const pageSize=$('pageSize').value.trim();if(pageSize)data.pageSize=pageSize;
+  const duplex=$('duplex').value.trim();if(duplex)data.duplex=duplex;
+  const color=$('color').value.trim();if(color)data.color=color;
+  const orientation=$('orientation').value.trim();if(orientation)data.orientation=orientation;
+  const resolution=$('resolution').value.trim();if(resolution)data.resolution=resolution;
+  const id=$('taskId').value.trim();if(id)data.id=id;
+  const callbackUrl=$('callbackUrl').value.trim();if(callbackUrl)data.callbackUrl=callbackUrl;
+  return data;
+}
+
+async function buildRequest(){
+  const baseUrl=$('apiEndpoint').value.trim().replace(/\/+$/,'');
+  const target=$('printerId').value.trim();
+  if(!baseUrl)throw new Error('Api Endpoint is required.');
+  if(!target)throw new Error('Printer ID is required.');
+  if(!$('fileUrl').value.trim())throw new Error('File URL is required.');
+  const printData=buildPrintData();
+  const publicKey=$('publicKey').value.trim();
+  const plaintext=JSON.stringify(printData);
+  const data=publicKey?await encryptData(publicKey,plaintext):plaintext;
+  return{baseUrl,target,body:{target,data}};
+}
+
+function setReq(bodyText,statusText,statusCls){
+  if(!bodyText){reqBodyEl.textContent='// Request body will appear here';reqBodyEl.classList.add('empty');}
+  else{reqBodyEl.textContent=bodyText;reqBodyEl.classList.remove('empty');}
+  if(statusText){reqStatusEl.textContent=statusText;reqStatusEl.className='pg-status '+(statusCls||'info');reqStatusEl.style.display='';}
+  else{reqStatusEl.style.display='none';}
+}
+function setRes(bodyText,statusText,statusCls){
+  if(!bodyText){resBodyEl.textContent='// Response will appear here after sending';resBodyEl.classList.add('empty');}
+  else{resBodyEl.textContent=bodyText;resBodyEl.classList.remove('empty');}
+  resStatusEl.textContent=statusText||'waiting';
+  resStatusEl.className='pg-status '+(statusCls||'info');
+}
+
+$('previewBtn').addEventListener('click',async()=>{
+  try{const{body}=await buildRequest();setReq(JSON.stringify(body,null,2),'preview','info');setRes('','not sent','info');}
+  catch(err){setReq('','error','err');setRes(err.message,'error','err');}
+});
+
+$('sendBtn').addEventListener('click',async()=>{
+  const btn=$('sendBtn');const original=btn.textContent;btn.disabled=true;btn.textContent='Sending...';
+  try{
+    const{baseUrl,target,body}=await buildRequest();
+    setReq(JSON.stringify(body,null,2),'ready','info');setRes('','sending...','info');
+    const publicKey=$('publicKey').value.trim();
+    const printData=buildPrintData();
+    await sendPrintRequest(baseUrl,target,printData,publicKey||null);
+    setRes('{ "status": "success" }','200 OK','ok');
+  }catch(err){
+    const msg=(typeof err==='object'&&err.message)?err.message:(typeof err==='string'?err:JSON.stringify(err));
+    setRes(msg||'Request failed','error','err');
+  }finally{btn.disabled=false;btn.textContent=original;}
+});
+</script>
+</body>
+</html>

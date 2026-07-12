@@ -1,0 +1,432 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>API Docs — ZeroPrint</title>
+  <meta name="description" content="ZeroPrint API documentation. How to send a print request? Use POST /api/print with RSA+AES-256-GCM end-to-end encryption. Includes Node.js and browser code examples.">
+  <meta property="og:title" content="API Docs — ZeroPrint">
+  <meta property="og:description" content="ZeroPrint API documentation, covering print requests, callback notifications, end-to-end encryption, and Node.js / browser example code.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://webappprint.com/docs.html">
+  <meta property="og:site_name" content="ZeroPrint">
+  <meta property="og:locale" content="en_US">
+  <link rel="canonical" href="https://webappprint.com/docs.html">
+  <meta name="keywords" content="ZeroPrint API,print API docs,HTTP print API,print callback,print encryption,Node.js print,browser print,PrintNode,ezeep,Printix,PrinterLogic,PaperCut,Zapier,Make,Airtable,Notion,Power Automate,n8n">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "name": "ZeroPrint API Docs",
+    "url": "https://webappprint.com/docs.html",
+    "description": "ZeroPrint API documentation, covering print requests, callback notifications, end-to-end encryption, and Node.js / browser example code.",
+    "isPartOf": {
+      "@type": "SoftwareApplication",
+      "name": "ZeroPrint",
+      "url": "https://webappprint.com/"
+    },
+    "about": {
+      "@type": "Thing",
+      "name": "Cloud Print HTTP API",
+      "description": "Send print jobs via POST /api/print, supporting PDF, Office, image and other file formats, with RSA+AES-256-GCM end-to-end encryption"
+    },
+    "programmingLanguage": ["JavaScript", "Node.js"],
+    "keywords": "cloud print API, HTTP print, print API, callback notification, end-to-end encryption, RSA, AES-256-GCM"
+  }
+  </script>
+  <link rel="icon" href="favicon.png" type="image/png">
+  <link rel="stylesheet" href="style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "How to send a print job with ZeroPrint",
+    "description": "Trigger local printing via a standard HTTP POST request with optional end-to-end encryption.",
+    "url": "https://webappprint.com/docs.html",
+    "step": [
+      {
+        "@type": "HowToStep",
+        "name": "Install the client",
+        "text": "Download and install the ZeroPrint Windows client. Ensure at least one local printer is connected."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Get configuration",
+        "text": "Copy the Api Endpoint, printer ID, and public key from the ZeroPrint client."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Send the print request",
+        "text": "Send a POST /api/print request with target (printer ID) and data (print job payload). RSA+AES-256-GCM encryption is recommended for production."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Receive callback",
+        "text": "If callbackUrl and id are provided, the client sends a result notification to that URL after printing completes."
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">Zero<span>Print</span></a>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="docs.html" class="active">API Docs</a></li>
+      <li><a href="playground.html">Playground</a></li>
+      <li><a href="download.html">Client Download</a></li>
+      <li><a href="pricing.html">Pricing</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <div class="container">
+    <div class="doc-layout">
+      <aside class="doc-sidebar">
+        <ul class="doc-sidebar-nav" id="docNav">
+          <li><a href="#base">Api Endpoint</a></li>
+          <li><a href="#print">Print Request</a></li>
+          <li><a href="#callback">Callback</a></li>
+          <li><a href="#encryption">Encryption</a></li>
+          <li><a href="#examples">Code Examples</a></li>
+        </ul>
+      </aside>
+      <div class="doc-content">
+        <div class="fade-up">
+          <h2 id="base">Api Endpoint</h2>
+          <div class="code-block">
+            <pre><code>Copy from your ZeroPrint client</code></pre>
+          </div>
+        </div>
+
+        <div class="fade-up">
+          <h2 id="print">Print Request</h2>
+          <div class="code-block">
+            <pre><code><span style="color:var(--accent);font-weight:600;">POST</span> /api/print
+Content-Type: application/json</code></pre>
+          </div>
+          <h4>Request Parameters</h4>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+              <tbody>
+                <tr><td><code>target</code></td><td>string</td><td style="color:var(--accent);font-weight:600;">Yes</td><td>Target printer ID, can be copied from the client</td></tr>
+                <tr><td><code>data</code></td><td>string</td><td style="color:var(--accent);font-weight:600;">Yes</td><td>Print job data. Plaintext JSON (debug only) or RSA+AES-256-GCM encrypted then Base64 encoded (recommended for production)</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <h4>Request Example</h4>
+          <p style="font-weight:600;color:var(--ink);font-size:14px;">Plaintext Mode (debug only)</p>
+          <div class="code-block">
+            <pre><code>{
+  "target": "&lt;Printer ID&gt;",
+  "data": "{\"url\":\"https://example.com/document.pdf\",\"copies\":1,\"id\":\"order_123\",\"callbackUrl\":\"https://your-server.com/callback\"}"
+}</code></pre>
+          </div>
+          <p style="font-weight:600;color:var(--ink);font-size:14px;">Encrypted Mode (recommended for production)</p>
+          <div class="code-block">
+            <pre><code>{
+  "target": "&lt;Printer ID&gt;",
+  "data": "SGVsbG8gV29ybGQgZm9yIGVuY3J5cHRlZC9pbnRlcmFjdGlvbiBvbmx5..."
+}</code></pre>
+          </div>
+          <h4>Data Field Parameters</h4>
+          <blockquote><p style="margin:0;"><code>pageSize</code>, <code>duplex</code>, <code>color</code>, <code>orientation</code>, <code>resolution</code> — Copy from client for printer-supported values. Uses printer defaults if not provided.</p></blockquote>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+              <tbody>
+                <tr><td><code>url</code></td><td>string</td><td style="color:var(--accent);font-weight:600;">Yes</td><td>URL of the file to print, supports public and internal network addresses</td></tr>
+                <tr><td><code>copies</code></td><td>number</td><td style="color:var(--ink-3);">No</td><td>Number of copies, default 1</td></tr>
+                <tr><td><code>id</code></td><td>string</td><td style="color:var(--ink-3);">No</td><td>Task ID, for callback correlation</td></tr>
+                <tr><td><code>callbackUrl</code></td><td>string</td><td style="color:var(--ink-3);">No</td><td>Print result callback URL</td></tr>
+                <tr><td><code>pageSize</code></td><td>string</td><td style="color:var(--ink-3);">No</td><td>Page size (copy from client)</td></tr>
+                <tr><td><code>duplex</code></td><td>string</td><td style="color:var(--ink-3);">No</td><td>Duplex mode (copy from client)</td></tr>
+                <tr><td><code>color</code></td><td>string</td><td style="color:var(--ink-3);">No</td><td>Color mode (copy from client)</td></tr>
+                <tr><td><code>orientation</code></td><td>string</td><td style="color:var(--ink-3);">No</td><td>Page orientation (copy from client)</td></tr>
+                <tr><td><code>resolution</code></td><td>string</td><td style="color:var(--ink-3);">No</td><td>Print resolution (copy from client)</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <h4>Response</h4>
+          <p><strong>Success</strong>: HTTP 200 OK, no response body.</p>
+          <p><strong>Failure</strong>: HTTP 400 Bad Request</p>
+          <div class="code-block">
+            <pre><code>{
+  "code": "PRINTER_OFFLINE",
+  "message": "target printer is offline"
+}</code></pre>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>code</th><th>message</th></tr></thead>
+              <tbody>
+                <tr><td><code>PRINTER_OFFLINE</code></td><td>target printer is offline</td></tr>
+                <tr><td><code>INVALID_TARGET</code></td><td>target is required and must be a 64-character lowercase hex string</td></tr>
+                <tr><td><code>INVALID_DATA</code></td><td>data is required and must be a non-empty string</td></tr>
+                <tr><td><code>INVALID_REQUEST</code></td><td>Invalid JSON format</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <hr>
+
+        <div class="fade-up">
+          <h2 id="callback">Callback</h2>
+          <p>After the print job completes, the client sends a POST request to <code>callbackUrl</code> to notify the result. Both <code>id</code> and <code>callbackUrl</code> must be provided to trigger the callback.</p>
+          <div class="code-block">
+            <pre><code><span style="color:var(--accent);font-weight:600;">POST</span> {callbackUrl}
+Content-Type: application/json</code></pre>
+          </div>
+          <h4>Callback Parameters</h4>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>
+              <tbody>
+                <tr><td><code>id</code></td><td>string</td><td>Task ID (matches the id in request)</td></tr>
+                <tr><td><code>success</code></td><td>boolean</td><td>Whether printing succeeded</td></tr>
+                <tr><td><code>error</code></td><td>string</td><td>Error description (only on failure)</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p style="font-weight:600;color:var(--ink);font-size:14px;">Success Callback</p>
+          <div class="code-block">
+            <pre><code>{ "id": "order_123", "success": true }</code></pre>
+          </div>
+          <p style="font-weight:600;color:var(--ink);font-size:14px;">Failure Callback</p>
+          <div class="code-block">
+            <pre><code>{ "id": "order_123", "success": false, "error": "PDF printing failed: ..." }</code></pre>
+          </div>
+          <blockquote><p style="margin:0;">Callback timeout: 5 seconds. HTTP status 2xx is considered success. Callback is fired regardless of print success or failure.</p></blockquote>
+        </div>
+
+        <hr>
+
+        <div class="fade-up">
+          <h2 id="encryption">Encryption</h2>
+          <p>RSA-2048 + AES-256-GCM hybrid encryption is recommended for production. Private key is stored locally on the client only; the cloud cannot decrypt.</p>
+          <h4>Encryption Steps</h4>
+          <ol style="color:var(--ink-2);padding-left:20px;line-height:2;font-size:14px;">
+            <li>Copy the public key (from client)</li>
+            <li>Generate AES-256 key and 12-byte Nonce</li>
+            <li>Encrypt JSON with AES-256-GCM (with auth tag)</li>
+            <li>Encrypt AES key with RSA-OAEP(SHA256) (256 bytes)</li>
+            <li>Concatenate: encrypted key + Nonce + ciphertext + tag</li>
+            <li>Base64 encode as the data value</li>
+          </ol>
+          <h4>Data Structure</h4>
+          <div class="code-block">
+            <pre><code>[RSA-encrypted AES key (256 bytes)][GCM Nonce (12 bytes)][Ciphertext + auth tag]</code></pre>
+          </div>
+        </div>
+
+        <hr>
+
+        <div class="fade-up">
+          <h2 id="examples">Code Examples</h2>
+          <div class="code-tabs" id="codeTabs">
+            <div class="code-tab-bar">
+              <button class="code-tab active" data-tab="nodejs">Node.js</button>
+              <button class="code-tab" data-tab="browser">Browser</button>
+              <button class="code-tab-copy" onclick="copyActiveCode(this)">Copy</button>
+            </div>
+            <div class="code-tab-panel active" data-panel="nodejs">
+              <div class="code-block">
+                <pre><code>const crypto = require("crypto");
+
+function encryptData(publicKey, plaintext) {
+  const wrapped = publicKey.match(/.{1,64}/g).join("\n");
+  const pemKey = `-----BEGIN PUBLIC KEY-----\n${wrapped}\n-----END PUBLIC KEY-----`;
+
+  const aesKey = crypto.randomBytes(32);
+  const nonce = crypto.randomBytes(12);
+
+  const cipher = crypto.createCipheriv("aes-256-gcm", aesKey, nonce);
+  const ciphertext = Buffer.concat([
+    cipher.update(plaintext, "utf8"),
+    cipher.final(),
+  ]);
+  const tag = cipher.getAuthTag();
+
+  const encryptedAesKey = crypto.publicEncrypt(
+    {
+      key: pemKey,
+      padding: crypto.constants.RSA_PKCS1_OAEP_PADDING,
+      oaepHash: "sha256",
+    },
+    aesKey,
+  );
+
+  return Buffer.concat([encryptedAesKey, nonce, ciphertext, tag]).toString("base64");
+}
+
+async function sendPrintRequest(target, printData, publicKey) {
+  const plaintext = JSON.stringify(printData);
+  const data = publicKey ? encryptData(publicKey, plaintext) : plaintext;
+
+  const response = await fetch("https://&lt;Api Endpoint&gt;/api/print", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ target, data }),
+  });
+
+  if (!response.ok) throw await response.json();
+  return { status: "success" };
+}
+
+const target = "&lt;Printer ID&gt;";
+const publicKey = "MIIBIjANBgkqhkiG9w0BAQEFAAO...";
+const printData = {
+  url: "https://example.com/document.pdf",
+  copies: 1,
+  id: "order_123",
+  callbackUrl: "https://your-server.com/callback",
+};
+
+sendPrintRequest(target, printData, publicKey)
+  .then(() => console.log("Encrypted mode - request successful"))
+  .catch((error) => console.error("Request failed:", error));
+
+sendPrintRequest(target, printData)
+  .then(() => console.log("Plaintext mode - request successful"))
+  .catch((error) => console.error("Request failed:", error));</code></pre>
+              </div>
+            </div>
+            <div class="code-tab-panel" data-panel="browser">
+              <div class="code-block">
+                <pre><code>async function encryptData(publicKey, plaintext) {
+  const publicKeyBytes = Uint8Array.from(atob(publicKey), c => c.charCodeAt(0));
+  const publicKeyObj = await crypto.subtle.importKey(
+    "spki", publicKeyBytes,
+    { name: "RSA-OAEP", hash: "SHA-256" }, true, ["encrypt"]
+  );
+
+  const aesKey = await crypto.subtle.generateKey(
+    { name: "AES-GCM", length: 256 }, true, ["encrypt"]
+  );
+  const nonce = crypto.getRandomValues(new Uint8Array(12));
+  const data = new TextEncoder().encode(plaintext);
+
+  const ciphertext = new Uint8Array(
+    await crypto.subtle.encrypt({ name: "AES-GCM", iv: nonce }, aesKey, data)
+  );
+
+  const aesKeyBytes = new Uint8Array(await crypto.subtle.exportKey("raw", aesKey));
+  const encryptedAesKey = new Uint8Array(
+    await crypto.subtle.encrypt(
+      { name: "RSA-OAEP", hash: "SHA-256" }, publicKeyObj, aesKeyBytes
+    )
+  );
+
+  const combined = new Uint8Array(encryptedAesKey.length + nonce.length + ciphertext.length);
+  combined.set(encryptedAesKey, 0);
+  combined.set(nonce, encryptedAesKey.length);
+  combined.set(ciphertext, encryptedAesKey.length + nonce.length);
+  return btoa(String.fromCharCode(...combined));
+}
+
+async function sendPrintRequest(target, printData, publicKey) {
+  const plaintext = JSON.stringify(printData);
+  const data = publicKey ? await encryptData(publicKey, plaintext) : plaintext;
+
+  const response = await fetch("https://&lt;Api Endpoint&gt;/api/print", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ target, data }),
+  });
+
+  if (!response.ok) throw await response.json();
+  return { status: "success" };
+}
+
+const target = "&lt;Printer ID&gt;";
+const publicKey = "MIIBIjANBgkqhkiG9w0BAQEFAAO...";
+const printData = {
+  url: "https://example.com/document.pdf",
+  copies: 1,
+  id: "order_123",
+  callbackUrl: "https://your-server.com/callback",
+};
+
+sendPrintRequest(target, printData, publicKey)
+  .then(() => console.log("Encrypted mode - request successful"))
+  .catch((error) => console.error("Request failed:", error));
+
+sendPrintRequest(target, printData)
+  .then(() => console.log("Plaintext mode - request successful"))
+  .catch((error) => console.error("Request failed:", error));</code></pre>
+              </div>
+            </div>
+          </div>
+          <p style="margin-top:16px;color:var(--ink-3);font-size:13.5px;">For other languages, follow the same logic or use AI-assisted translation.</p>
+        </div>
+
+        <div style="height:80px;"></div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <span>&copy; 2026 ZeroPrint</span>
+    <div class="footer-links">
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+window.addEventListener('scroll', () => { document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 10); });
+document.getElementById('navToggle').addEventListener('click', () => { document.getElementById('navLinks').classList.toggle('open'); });
+
+document.querySelectorAll('.code-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    const tabs = tab.closest('.code-tabs');
+    tabs.querySelectorAll('.code-tab').forEach(t => t.classList.remove('active'));
+    tabs.querySelectorAll('.code-tab-panel').forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    tabs.querySelector(`[data-panel="${tab.dataset.tab}"]`).classList.add('active');
+  });
+});
+
+function copyActiveCode(btn) {
+  const tabs = btn.closest('.code-tabs');
+  const activePanel = tabs.querySelector('.code-tab-panel.active');
+  const code = activePanel.querySelector('code').textContent;
+  navigator.clipboard.writeText(code).then(() => {
+    btn.textContent = 'Copied';
+    setTimeout(() => btn.textContent = 'Copy', 2000);
+  });
+}
+
+const sections = document.querySelectorAll('.doc-content h2[id]');
+const navLinks = document.querySelectorAll('.doc-sidebar-nav a');
+const spyObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      navLinks.forEach(link => link.classList.remove('active'));
+      const activeLink = document.querySelector(`.doc-sidebar-nav a[href="#${entry.target.id}"]`);
+      if (activeLink) activeLink.classList.add('active');
+    }
+  });
+}, { rootMargin: '-80px 0px -70% 0px', threshold: 0 });
+sections.forEach(section => spyObserver.observe(section));
+</script>
+
+</body>
+</html>

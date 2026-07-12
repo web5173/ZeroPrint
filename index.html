@@ -1,772 +1,482 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-
+﻿<!DOCTYPE html>
+<html lang="en" class="home">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZeroPrint</title>
-    <link rel="icon" type="image/png" href="/favicon.png">
-    <style>
-        /* ========== 全局重置 ========== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZeroPrint — Simple, Secure, Controlled Cloud Printing Solution</title>
+  <meta name="description" content="What is ZeroPrint? ZeroPrint is a cloud printing solution for system integration. Send HTTP requests to trigger local printing with end-to-end encryption. The cloud never touches file content. From $999/year.">
+  <meta property="og:title" content="ZeroPrint — Simple, Secure, Controlled Cloud Printing">
+  <meta property="og:description" content="ZeroPrint enables business systems to trigger local printing directly via standard HTTP requests. End-to-end encrypted, secure and controlled — the cloud never handles plaintext content.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://webappprint.com/">
+  <meta property="og:site_name" content="ZeroPrint">
+  <meta property="og:locale" content="en_US">
+  <link rel="canonical" href="https://webappprint.com/">
+  <meta name="keywords" content="cloud printing,HTTP printing,remote printing,print API,CUPS,end-to-end encryption,silent printing,backend printing,system integration printing,SaaS printing,low-code printing,no-code printing,ERP printing,WMS printing,PrintNode,ezeep,Printix,PrinterLogic,PaperCut,ThinPrint,Microsoft Universal Print,Zapier,Make,Airtable,Notion,Monday.com,Salesforce,HubSpot,Power Automate,n8n,Workato,ServiceNow,Retool,Bubble,Webflow">
+  <link rel="stylesheet" href="style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "ZeroPrint",
+    "url": "https://webappprint.com/",
+    "description": "ZeroPrint enables business systems to trigger local printing directly via standard HTTP requests. End-to-end encrypted, secure and controlled — the cloud never handles plaintext content.",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Windows 10+",
+    "softwareVersion": "1.0",
+    "offers": [
+      {
+        "@type": "Offer",
+        "name": "Standard Plan",
+        "price": "999",
+        "priceCurrency": "USD",
+        "priceValidUntil": "2026-12-31",
+        "description": "$999/year/host"
+      },
+      {
+        "@type": "Offer",
+        "name": "Founder Special",
+        "price": "999",
+        "priceCurrency": "USD",
+        "priceValidUntil": "2026-08-31",
+        "description": "$999/3 years/host, limited to 10 copies"
+      }
+    ],
+    "featureList": [
+      "HTTP API print integration, no SDK required",
+      "RSA + AES-256-GCM end-to-end encryption",
+      "Cloud never stores print content, never accesses file content",
+      "Supports Windows 10 and above"
+    ]
+  }
+  </script>
+  <link rel="icon" href="favicon.png" type="image/png">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "url": "https://webappprint.com/",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How is this different from traditional cloud printing?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Traditional cloud printing usually hands files over to the server for processing. ZeroPrint's cloud only relays messages — files are fetched and printed directly by the local client from the URL you provide. The cloud never interprets the content."
         }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
-            background: #f2f2f2;
-            min-height: 100vh;
-            padding: 20px;
-            /* 防止页面滚动条 */
-            overflow: hidden;
+      },
+      {
+        "@type": "Question",
+        "name": "What types of systems can integrate?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Any system that can send HTTP requests can integrate — whether it's a custom system, a low-code platform, or a SaaS product. There is no dependency on a specific programming language or runtime."
         }
-
-        /* ========== 主容器：占满屏幕宽度 ========== */
-        .app {
-            width: 100%;
-            height: calc(100vh - 40px);
-            background: #ffffff;
-            border-radius: 6px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
+      },
+      {
+        "@type": "Question",
+        "name": "Where should files be stored?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "You can continue using your existing file storage. Files can be at public URLs or internal network addresses — as long as the client can access the HTTP/HTTPS URL, it works. Files never pass through the ZeroPrint cloud."
         }
-
-        /* ========== 头部 ========== */
-        .header {
-            padding: 18px 28px 12px 28px;
-            background: #ffffff;
-            border-bottom: 1px solid #e6e6e6;
-            flex-shrink: 0;
-            display: flex;
-            flex-wrap: wrap;
-            align-items: baseline;
-            gap: 6px 16px;
+      },
+      {
+        "@type": "Question",
+        "name": "What file formats are supported?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "PDF, XPS, Office documents (Word/Excel/PowerPoint), OpenDocument, common image formats, and HTML pages."
         }
-
-        .product-name {
-            font-size: 24px;
-            font-weight: 600;
-            color: #333;
-            letter-spacing: 0.5px;
+      },
+      {
+        "@type": "Question",
+        "name": "What printers are supported?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Supports local printers on Windows, regardless of brand or model."
         }
-
-        .product-name .highlight {
-            color: #16baaa;
+      },
+      {
+        "@type": "Question",
+        "name": "Does the sender need to install the client?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. The sender only needs to be able to send HTTP requests — whether from a low-code platform, custom system, or script. The client only needs to be installed on the Windows PC connected to the printer."
         }
-
-        .slogan {
-            font-size: 14px;
-            color: #999;
-            font-weight: 400;
-            letter-spacing: 0.3px;
-        }
-
-        .format-hint {
-            width: 100%;
-            font-size: 13px;
-            color: #aaa;
-            margin-top: 2px;
-            letter-spacing: 0.2px;
-        }
-
-        /* ========== 内容区域（滚动） ========== */
-        .content-scroll {
-            flex: 1;
-            overflow-y: auto;
-            padding: 20px 28px 28px 28px;
-        }
-
-        .content-scroll::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        .content-scroll::-webkit-scrollbar-track {
-            background: #f2f2f2;
-            border-radius: 4px;
-        }
-
-        .content-scroll::-webkit-scrollbar-thumb {
-            background: #d2d2d2;
-            border-radius: 4px;
-        }
-
-        .content-scroll::-webkit-scrollbar-thumb:hover {
-            background: #b8b8b8;
-        }
-
-        /* ========== 区块 ========== */
-        .section {
-            margin-bottom: 18px;
-        }
-
-        .section-title {
-            font-size: 15px;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 12px;
-            padding-bottom: 6px;
-            border-bottom: 1px solid #f0f0f0;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .section-title i {
-            font-style: normal;
-            font-size: 18px;
-        }
-
-        /* ========== 表单网格 ========== */
-        .form-grid-4 {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 12px 20px;
-        }
-
-        .form-grid-2 {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px 24px;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 3px;
-        }
-
-        .form-group label {
-            font-size: 13px;
-            font-weight: 500;
-            color: #333;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .form-group label .required-star {
-            color: #ff5722;
-            font-weight: 600;
-            margin-left: 2px;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            padding: 7px 12px;
-            background: #ffffff;
-            border: 1px solid #d2d2d2;
-            border-radius: 4px;
-            font-size: 14px;
-            font-family: inherit;
-            transition: border-color 0.2s ease, box-shadow 0.2s ease;
-            width: 100%;
-            color: #333;
-            outline: none;
-            height: 38px;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            border-color: #16baaa;
-            box-shadow: 0 0 0 3px rgba(22, 186, 170, 0.10);
-        }
-
-        .form-group textarea {
-            min-height: 56px;
-            resize: vertical;
-            font-family: "SF Mono", "Menlo", monospace;
-            font-size: 13px;
-            height: auto;
-        }
-
-        .form-group input::placeholder {
-            color: #c2c2c2;
-            font-size: 13px;
-        }
-
-        .full-width {
-            grid-column: 1 / -1;
-        }
-
-        /* ========== 单选框组 ========== */
-        .radio-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 24px;
-            background: #fafafa;
-            padding: 10px 18px;
-            border-radius: 4px;
-            border: 1px solid #e6e6e6;
-        }
-
-        .radio-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: 500;
-            color: #333;
-        }
-
-        .radio-item input[type="radio"] {
-            width: 16px;
-            height: 16px;
-            accent-color: #16baaa;
-            cursor: pointer;
-            margin: 0;
-        }
-
-        /* ========== 按钮组 ========== */
-        .button-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-top: 16px;
-            align-items: center;
-        }
-
-        button {
-            padding: 8px 22px;
-            border: none;
-            border-radius: 4px;
-            font-size: 14px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            letter-spacing: 0.3px;
-            height: 38px;
-            background: #f2f2f2;
-            color: #333;
-            border: 1px solid #d2d2d2;
-        }
-
-        .btn-primary {
-            background: #16baaa;
-            color: #fff;
-            border-color: #16baaa;
-        }
-
-        .btn-primary:hover {
-            background: #13a89a;
-            border-color: #13a89a;
-            opacity: 0.9;
-        }
-
-        .btn-secondary {
-            background: #f2f2f2;
-            color: #333;
-            border-color: #d2d2d2;
-        }
-
-        .btn-secondary:hover {
-            background: #e6e6e6;
-            border-color: #b8b8b8;
-        }
-
-        /* ========== 结果区域 ========== */
-        .result-section {
-            margin-top: 18px;
-            border-radius: 4px;
-            background: #fafafa;
-            border: 1px solid #e6e6e6;
-            overflow: hidden;
-            flex-shrink: 0;
-            max-height: 200px;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .result-section.hidden {
-            display: none;
-        }
-
-        .result-header {
-            padding: 8px 16px;
-            background: #f0f0f0;
-            border-bottom: 1px solid #e6e6e6;
-            font-weight: 600;
-            color: #333;
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            flex-shrink: 0;
-        }
-
-        .result-content {
-            padding: 12px 16px;
-            background: #1e1e1e;
-            color: #e0e0e0;
-            font-family: "SF Mono", "Menlo", monospace;
-            font-size: 12px;
-            line-height: 1.6;
-            overflow-x: auto;
-            overflow-y: auto;
-            white-space: pre-wrap;
-            word-break: break-word;
-            flex: 1;
-        }
-
-        .result-content::-webkit-scrollbar {
-            width: 5px;
-            height: 5px;
-        }
-
-        .result-content::-webkit-scrollbar-track {
-            background: #2c2c2c;
-        }
-
-        .result-content::-webkit-scrollbar-thumb {
-            background: #636363;
-            border-radius: 4px;
-        }
-
-        .status-success {
-            color: #16baaa;
-        }
-
-        .status-error {
-            color: #ff5722;
-        }
-
-        .status-info {
-            color: #5bc0de;
-        }
-
-        /* ========== 响应式 ========== */
-        @media (max-width: 900px) {
-            .form-grid-4 {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .form-grid-2 {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .app {
-                height: calc(100vh - 30px);
-            }
-        }
-
-        @media (max-width: 600px) {
-            body {
-                padding: 10px;
-            }
-
-            .app {
-                height: calc(100vh - 20px);
-                border-radius: 4px;
-            }
-
-            .header {
-                padding: 14px 16px 10px 16px;
-            }
-
-            .content-scroll {
-                padding: 14px 16px 20px;
-            }
-
-            .form-grid-4,
-            .form-grid-2 {
-                grid-template-columns: 1fr;
-            }
-
-            .product-name {
-                font-size: 20px;
-            }
-
-            .slogan {
-                font-size: 13px;
-            }
-
-            .radio-group {
-                gap: 12px;
-            }
-
-            .button-group {
-                flex-direction: column;
-                align-items: stretch;
-            }
-
-            button {
-                justify-content: center;
-            }
-        }
-    </style>
+      }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "url": "https://webappprint.com/",
+    "name": "About ZeroPrint",
+    "description": "ZeroPrint is a cloud printing solution for system integration. Business systems send HTTP requests, and the local client handles printing. The cloud only forwards messages — it never touches file content. Supports RSA+AES-256-GCM end-to-end encryption. Ideal for low-code platforms, SaaS products, and enterprise systems.",
+    "about": {
+      "@type": "SoftwareApplication",
+      "name": "ZeroPrint",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Windows 10+",
+      "description": "Cloud printing solution. Trigger local printing via HTTP API with end-to-end encryption. The cloud never touches file content."
+    }
+  }
+  </script>
 </head>
-
 <body>
 
-    <div class="app">
-        <div class="header">
-            <span class="product-name">Zero<span class="highlight">Print</span></span>
-            <span class="slogan">端到端加密打印，零信任架构 · 零内容存储 · 只加密中转</span>
-            <div class="format-hint">
-                支持文档格式：pdf、docx、doc、xlsx、xls、pptx、ppt、odt、ods、odp、jpg、jpeg、png、gif、bmp、tif、tiff、webp、svg、heic、heif、avif、jxl、html、htm、xps
-            </div>
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">Zero<span>Print</span></a>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="docs.html">API Docs</a></li>
+      <li><a href="playground.html">Playground</a></li>
+      <li><a href="download.html">Client Download</a></li>
+      <li><a href="pricing.html">Pricing</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-tag fade-up">For System Integration</div>
+        <h1 class="fade-up">Turn <span class="accent" style="font-weight:700;">Printing</span><br>into an <span class="accent">HTTP Request</span></h1>
+        <p class="hero-sub fade-up delay-1">ZeroPrint is a cloud printing solution designed for system integration. Your business system sends a request, and the local client handles the printing. The cloud only relays messages — it never touches file content.</p>
+        <div class="hero-actions fade-up delay-2">
+          <a href="playground.html" class="btn btn-primary">Playground</a>
+          <a href="pricing.html" class="btn btn-outline">7-Day Free Trial</a>
         </div>
-
-        <div class="content-scroll">
-            <!-- 基本参数 -->
-            <div class="section">
-                <div class="section-title"><span>📋</span> 基本参数</div>
-                <div class="form-grid-2">
-                    <div class="form-group">
-                        <label>打印机 ID <span class="required-star">*</span></label>
-                        <input type="text" id="target" placeholder="从客户端复制">
-                    </div>
-                    <div class="form-group">
-                        <label>文档地址 <span class="required-star">*</span></label>
-                        <input type="text" id="url" placeholder="公网、内网 HTTP/HTTPS">
-                    </div>
-                </div>
-            </div>
-
-            <!-- 可选参数 -->
-            <div class="section">
-                <div class="section-title"><span>⚙️</span> 可选参数</div>
-                <div class="form-grid-4">
-                    <div class="form-group">
-                        <label>打印份数</label>
-                        <input type="text" id="copies" placeholder="默认 1">
-                    </div>
-                    <div class="form-group">
-                        <label>纸张大小</label>
-                        <input type="text" id="pageSize" placeholder="从客户端复制">
-                    </div>
-                    <div class="form-group">
-                        <label>双面打印</label>
-                        <input type="text" id="duplex" placeholder="从客户端复制">
-                    </div>
-                    <div class="form-group">
-                        <label>颜色模式</label>
-                        <input type="text" id="color" placeholder="从客户端复制">
-                    </div>
-                    <div class="form-group">
-                        <label>方向</label>
-                        <input type="text" id="orientation" placeholder="从客户端复制">
-                    </div>
-                    <div class="form-group">
-                        <label>分辨率</label>
-                        <input type="text" id="resolution" placeholder="从客户端复制">
-                    </div>
-                    <div class="form-group">
-                        <label>任务 ID</label>
-                        <input type="text" id="id" placeholder="回调时可用于区分任务">
-                    </div>
-                    <div class="form-group">
-                        <label>回调地址</label>
-                        <input type="text" id="callbackUrl" placeholder="公网、内网 HTTP/HTTPS">
-                    </div>
-                </div>
-            </div>
-
-            <!-- 公钥 -->
-            <div class="section">
-                <div class="section-title"><span>🔐</span> 公钥 <span
-                        style="font-weight:400; font-size:12px; color:#999;">（仅加密模式需要）</span></div>
-                <div class="form-grid-4" style="grid-template-columns: 1fr;">
-                    <div class="form-group full-width">
-                        <label>公钥</label>
-                        <textarea id="publicKey" placeholder="从客户端复制"></textarea>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 发送模式 -->
-            <div class="section">
-                <div class="section-title"><span>📤</span> 发送模式</div>
-                <div class="radio-group">
-                    <label class="radio-item">
-                        <input type="radio" name="mode" value="plaintext" checked> 明文 JSON
-                    </label>
-                    <label class="radio-item">
-                        <input type="radio" name="mode" value="base64"> Base64 编码
-                    </label>
-                    <label class="radio-item">
-                        <input type="radio" name="mode" value="encrypted"> AES-256-GCM + RSA 加密
-                    </label>
-                </div>
-            </div>
-
-            <!-- 操作按钮 -->
-            <div class="button-group">
-                <button class="btn-primary" onclick="sendPrintTask()">📤 发送打印任务</button>
-                <button class="btn-secondary" onclick="previewData()">👁️ 预览 Data</button>
-                <button class="btn-secondary" onclick="clearForm()">🗑️ 清空</button>
-            </div>
-
-            <!-- 结果区域 -->
-            <div id="resultSection" class="result-section hidden">
-                <div class="result-header">📊 执行结果</div>
-                <div id="resultContent" class="result-content"></div>
-            </div>
-        </div>
-        <!-- /content-scroll -->
+      </div>
     </div>
-    <!-- /app -->
+  </section>
 
-    <script>
-        // ============================================================
-        //  工具函数
-        // ============================================================
+  <!-- Value 1: Easy Integration -->
+  <section class="value-full">
+    <div class="container">
+      <div class="value-full-inner">
+        <div class="value-full-text fade-up">
+          <div class="value-full-tag">Easy Integration</div>
+          <h2>One Request,<br>Print Done</h2>
+          <p>No dependency on a specific programming language or runtime. As long as your system can send HTTP requests, a single POST is all it takes to trigger local printing.</p>
+          <div class="value-full-note">Supports JSON format, no SDK needed, no driver adaptation required.</div>
+        </div>
+        <div class="value-full-visual fade-up delay-1" style="min-width:0;">
+          <div class="code-block" style="margin:0;width:100%;">
+            <div class="code-header"><span class="code-lang">JavaScript</span></div>
+            <pre><code>fetch("https://&lt;Api Endpoint&gt;/api/print", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    target: "&lt;Printer ID&gt;",
+    data: JSON.stringify({
+      url: "https://example.com/invoice.pdf"
+    })
+  })
+})</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        function stringToBase64(str) {
-            const encoder = new TextEncoder();
-            const bytes = encoder.encode(str);
-            let binary = '';
-            for (let i = 0; i < bytes.length; i++) {
-                binary += String.fromCharCode(bytes[i]);
-            }
-            return btoa(binary);
-        }
+  <!-- Value 2: Secure & Controlled -->
+  <section class="value-full">
+    <div class="container">
+      <div class="value-full-inner value-full-reverse">
+        <div class="value-full-text fade-up">
+          <div class="value-full-tag">Secure & Controlled</div>
+          <h2 style="font-size:clamp(28px,3.5vw,42px)">End-to-End Encryption,<br>Secure & Controlled</h2>
+          <p>ZeroPrint's cloud only handles message forwarding and routing — it never interprets content. Print tasks support end-to-end encryption. Private keys are stored only on the local device; the cloud receives only unreadable ciphertext.</p>
+        </div>
+        <div class="value-full-visual fade-up delay-1">
+          <ul class="feature-list" style="gap:16px;">
+            <li><strong>RSA + AES-256-GCM</strong> — hybrid encryption for production</li>
+            <li><strong>Local key storage</strong> — private keys never leave the device</li>
+            <li><strong>Files bypass cloud</strong> — client downloads directly from URL</li>
+            <li><strong>Auto cleanup</strong> — temp files removed after printing</li>
+            <li><strong>HTTPS</strong> — encrypted communication throughout</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        function buildPayload() {
-            const payload = {
-                url: document.getElementById('url').value.trim()
-            };
+  <!-- Value 3: Different from Traditional Cloud Printing -->
+  <section class="value-full">
+    <div class="container">
+      <div class="value-full-inner">
+        <div class="value-full-text fade-up">
+          <div class="value-full-tag">Architectural Difference</div>
+          <h2>Not Your Traditional Cloud Printing</h2>
+          <p>Traditional cloud printing usually hands files over to the server for processing. ZeroPrint securely delivers print tasks to the local client — the cloud never touches file content.</p>
+          <ul class="feature-list" style="margin-top:20px;">
+            <li>Print commands support encrypted transmission</li>
+            <li>Cloud only handles message forwarding and routing</li>
+            <li>Files are fetched directly by the client, bypassing the cloud</li>
+            <li>Private keys are stored locally only</li>
+          </ul>
+        </div>
+        <div class="value-full-visual fade-up delay-1" style="min-width:0;">
+          <div class="table-wrap" style="margin:0;">
+          <table class="compare-table" style="margin:0;width:100%;">
+            <thead>
+              <tr><th>Capability</th><th>ZeroPrint</th><th>Traditional</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Command & content encryption</td><td class="highlight-yes">Supported</td><td class="highlight-no">Usually not</td></tr>
+              <tr><td>Cloud reads files</td><td class="highlight-yes">Not needed</td><td class="highlight-no">Usually required</td></tr>
+              <tr><td>Print files pass through cloud</td><td class="highlight-yes">No</td><td class="highlight-no">Usually yes</td></tr>
+              <tr><td>File download party</td><td class="highlight-yes">Client direct</td><td class="highlight-no">Cloud processing</td></tr>
+              <tr><td>Private key storage</td><td class="highlight-yes">Local device</td><td class="highlight-no">Cloud / N/A</td></tr>
+            </tbody>
+          </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-            const copies = document.getElementById('copies').value.trim();
-            if (copies) payload.copies = parseInt(copies, 10);
+  <!-- How it works / Architecture -->
+  <section class="section snap">
+    <div class="container">
+      <p class="section-label fade-up" style="text-align:right;">How it works</p>
+      <h2 class="section-title fade-up" style="text-align:right;">Simple Print Pipeline</h2>
+      <div class="fade-up architecture-svg-wrap" style="max-width:100%;">
+        <svg
+           viewBox="0 0 960 490"
+           font-family="system-ui, -apple-system, sans-serif"
+           version="1.1"
+           xmlns="http://www.w3.org/2000/svg">
+          <style id="style1">
+            @media (max-width:600px) { svg { width:100%;height:auto; } }
+            .accent { fill:#16baaa }
+            .label-main { font-size:14px;font-weight:700;fill:#1a1a2f }
+            .label-sub { font-size:12px;fill:#555;font-weight:600 }
+            .item { font-size:12px;fill:#444 }
+            .note { font-size:11px;fill:#999 }
+            .arrow-label { font-size:11px;fill:#666;font-weight:600 }
+          </style>
+          <defs id="defs3">
+            <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+              <path d="M 0,0 10,5 0,10 Z" fill="#555555" id="path1" />
+            </marker>
+            <marker id="arr-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto" preserveAspectRatio="xMidYMid">
+              <path d="M 0,0 10,5 0,10 Z" fill="#16baaa" id="path2" />
+            </marker>
+            <marker id="arr-g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+              <path d="M 0,0 10,5 0,10 Z" fill="#bbbbbb" id="path3" />
+            </marker>
+          </defs>
+          <rect x="3.569356" y="4.7846723" width="269.17636" height="480.62384" rx="8.2823496" fill="#fafafa" stroke="#e0e0e0" stroke-width="1.04005" id="rect3" />
+          <text x="124.71331" y="76.892555" text-anchor="middle" class="label-main" id="text3" style="stroke-width:1.04005" transform="scale(0.99542385,1.0045972)">Business Systems</text>
+          <g transform="matrix(1.0352937,0,0,1.0448344,53.263451,105.08877)" id="g6">
+            <rect x="0" y="2" width="28" height="20" rx="2" fill="#ffffff" stroke="#bbbbbb" stroke-width="1" id="rect4" />
+            <rect x="10" y="22" width="8" height="3" fill="#bbbbbb" id="rect5" />
+            <rect x="5" y="25" width="18" height="2" rx="1" fill="#bbbbbb" id="rect6" />
+            <text x="40" y="17" class="item" id="text6">ERP/Management</text>
+          </g>
+          <g transform="matrix(1.0352937,0,0,1.0448344,53.263451,145.83733)" id="g9">
+            <rect x="0" y="2" width="28" height="20" rx="2" fill="#ffffff" stroke="#bbbbbb" stroke-width="1" id="rect7" />
+            <rect x="10" y="22" width="8" height="3" fill="#bbbbbb" id="rect8" />
+            <rect x="5" y="25" width="18" height="2" rx="1" fill="#bbbbbb" id="rect9" />
+            <text x="40" y="17" class="item" id="text9">Low-Code/Automation</text>
+          </g>
+          <g transform="matrix(1.0352937,0,0,1.0448344,53.263451,186.58586)" id="g11">
+            <rect x="4" y="0" width="18" height="28" rx="3" fill="#ffffff" stroke="#bbbbbb" stroke-width="1" id="rect10" />
+            <rect x="10" y="24" width="6" height="2" rx="1" fill="#bbbbbb" id="rect11" />
+            <text x="40" y="17" class="item" id="text11">Collaboration Suite</text>
+          </g>
+          <g transform="matrix(1.0352937,0,0,1.0448344,53.263451,223.15505)" id="g14">
+            <rect x="0" y="2" width="28" height="20" rx="2" fill="#ffffff" stroke="#bbbbbb" stroke-width="1" id="rect12" />
+            <rect x="10" y="22" width="8" height="3" fill="#bbbbbb" id="rect13" />
+            <rect x="5" y="25" width="18" height="2" rx="1" fill="#bbbbbb" id="rect14" />
+            <text x="40" y="17" class="item" id="text14">Custom Apps/Scripts</text>
+          </g>
+          <g transform="matrix(1.0352937,0,0,1.0448344,53.263451,263.90359)" id="g16">
+            <rect x="4" y="0" width="18" height="28" rx="3" fill="#ffffff" stroke="#bbbbbb" stroke-width="1" id="rect15" />
+            <rect x="10" y="24" width="6" height="2" rx="1" fill="#bbbbbb" id="rect16" />
+            <text x="40" y="17" class="item" id="text16">Third-Party SaaS</text>
+          </g>
+          <text x="85.113213" y="379.08762" text-anchor="middle" font-size="13.8166px" fill="#cccccc" id="text17" transform="scale(1.1988998,0.83409808)" style="fill:#000000;stroke-width:0.863537">···</text>
+          <text x="127.29132" y="349.59167" text-anchor="middle" class="note" id="text18" style="stroke-width:1.04005" transform="scale(0.99542384,1.0045972)">No ZeroPrint client needed</text>
+          <text x="99.619446" y="370.39273" text-anchor="middle" class="note" id="text19" style="stroke-width:1.04005" transform="scale(0.99542385,1.0045972)">No printer needed</text>
+          <line x1="295.52216" y1="192.85486" x2="412.54993" y2="192.85486" stroke="#555" stroke-width="1.9904" marker-end="url(#arr)" id="line19" style="stroke:#16baaa;stroke-opacity:1;marker-end:url(#arr-a)" />
+          <text x="348.88336" y="179.4917" text-anchor="middle" class="arrow-label" id="text20" style="stroke-width:1.04005" transform="scale(0.99542385,1.0045972)">Encrypted Command</text>
+          <text x="348.88336" y="210.6933" text-anchor="middle" class="note" id="text21" style="stroke-width:1.04005" transform="scale(0.99542385,1.0045972)">HTTPS POST</text>
+          <g transform="matrix(2.1448905,0,0,2.1646567,430.17853,144.18049)" id="g21" style="stroke-width:0.517432;stroke-dasharray:none">
+            <path d="M 8,30 A 12,12 0 0 1 9,7 16,16 0 0 1 40,7 12,12 0 0 1 41,30 Z" fill="#d0f4ee" stroke="#16baaa" stroke-width="1.2" id="path21" style="stroke-width:0.517432;stroke-dasharray:none" />
+          </g>
+          <text x="484.59485" y="189.16656" text-anchor="middle" font-size="14.5607px" font-weight="700" class="accent" id="text22" style="fill:#000000;stroke-width:1.04005" transform="scale(0.99542385,1.0045972)">ZeroPrint</text>
+          <line x1="552.27502" y1="192.85486" x2="666.15741" y2="192.85486" stroke="#16baaa" stroke-width="1.87209" marker-end="url(#arr-a)" id="line24" />
+          <text x="612.01678" y="179.4917" text-anchor="middle" class="arrow-label" fill="#16baaa" id="text25" style="stroke-width:1.04005" transform="scale(0.99542385,1.0045972)">Forward Ciphertext</text>
+          <rect x="686.86316" y="4.7846723" width="269.17636" height="480.62384" rx="8.2823496" fill="#fafafa" stroke="#e0e0e0" stroke-width="1.04005" id="rect25" />
+          <g transform="matrix(0.82762529,0,0,0.85185442,743.98965,62.242338)" id="g30">
+            <rect x="0" y="0" width="36" height="26" rx="2" fill="#ffffff" stroke="#16baaa" stroke-width="1.2" id="rect26" />
+            <rect x="12" y="26" width="12" height="4" fill="#16baaa" id="rect27" />
+            <rect x="6" y="30" width="24" height="3" rx="1" fill="#16baaa" id="rect28" />
+            <text x="18" y="18" text-anchor="middle" font-size="11px" id="text28">&#x1F510;</text>
+            <text x="113.84116" y="20.616983" text-anchor="middle" class="label-main" fill="#16baaa" id="text26" transform="scale(1.0098895,0.99020735)" style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:17.3414px;font-family:system-ui, -apple-system, sans-serif;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-anchor:middle;fill:#16baaa;fill-opacity:1;stroke-width:1.73257">ZeroPrint Client</text>
+          </g>
+          <g transform="matrix(1.0352937,0,0,1.0448344,745.8749,107.17844)" id="g33">
+            <g stroke="#888888" stroke-width="1" fill="#ffffff" id="g32">
+              <rect x="0" y="4" width="24" height="14" rx="2" id="rect30" />
+              <rect x="3" y="0" width="18" height="6" fill="#eeeeee" id="rect31" />
+              <rect x="5" y="16" width="14" height="4" fill="#dddddd" id="rect32" />
+            </g>
+            <text x="34" y="16" class="item" id="text32">Invoice Printer</text>
+          </g>
+          <g transform="matrix(1.0352937,0,0,1.0448344,745.8749,146.88215)" id="g36">
+            <g stroke="#888888" stroke-width="1" fill="#ffffff" id="g35">
+              <rect x="0" y="4" width="24" height="14" rx="2" id="rect33" />
+              <rect x="3" y="0" width="18" height="6" fill="#eeeeee" id="rect34" />
+              <rect x="5" y="16" width="14" height="4" fill="#dddddd" id="rect35" />
+            </g>
+            <text x="34" y="16" class="item" id="text35">Contract Printer</text>
+          </g>
+          <g transform="matrix(1.0352937,0,0,1.0448344,745.8749,186.58586)" id="g39">
+            <g stroke="#888888" stroke-width="1" fill="#ffffff" id="g38">
+              <rect x="0" y="4" width="24" height="14" rx="2" id="rect36" />
+              <rect x="3" y="0" width="18" height="6" fill="#eeeeee" id="rect37" />
+              <rect x="5" y="16" width="14" height="4" fill="#dddddd" id="rect38" />
+            </g>
+            <text x="34" y="16" class="item" id="text38">Resume Printer</text>
+          </g>
+          <g transform="matrix(1.0352937,0,0,1.0448344,745.8749,226.28956)" id="g42">
+            <g stroke="#888888" stroke-width="1" fill="#ffffff" id="g41">
+              <rect x="0" y="4" width="24" height="14" rx="2" id="rect39" />
+              <rect x="3" y="0" width="18" height="6" fill="#eeeeee" id="rect40" />
+              <rect x="5" y="16" width="14" height="4" fill="#dddddd" id="rect41" />
+            </g>
+            <text x="34" y="16" class="item" id="text41">Label Printer</text>
+          </g>
+          <g transform="matrix(1.0352937,0,0,1.0448344,745.8749,265.99327)" id="g45">
+            <g stroke="#888888" stroke-width="1" fill="#ffffff" id="g44">
+              <rect x="0" y="4" width="24" height="14" rx="2" id="rect42" />
+              <rect x="3" y="0" width="18" height="6" fill="#eeeeee" id="rect43" />
+              <rect x="5" y="16" width="14" height="4" fill="#dddddd" id="rect44" />
+            </g>
+            <text x="34" y="16" class="item" id="text44">Shipping Label Printer</text>
+          </g>
+          <text x="791.95599" y="314.69861" text-anchor="middle" font-size="16.6408px" fill="#cccccc" id="text45" style="fill:#000000;stroke-width:1.04005" transform="scale(0.99542385,1.0045972)">···</text>
+          <path d="m 759.33375,339.13167 q 0,73.13842 -72.47058,94.0351 -103.52936,31.34504 -310.5881,31.34504 -103.52936,0 -186.35286,-31.34504 -41.41174,-20.89668 -51.76467,-31.34503" fill="none" stroke="#bbbbbb" stroke-width="1.24806" stroke-dasharray="6, 3" marker-end="url(#arr-g)" id="path46" />
+          <text x="482.01022" y="451.98563" text-anchor="middle" font-size="11.4406px" fill="#bbb" id="text47" style="fill:#000000;stroke-width:1.04005" transform="scale(0.99542385,1.0045972)">Callback print result (client connects directly, bypassing cloud)</text>
+        </svg>
+      </div>
+    </div>
+  </section>
 
-            const pageSize = document.getElementById('pageSize').value.trim();
-            if (pageSize) payload.pageSize = pageSize;
+  <!-- Use Cases -->
+  <section class="section snap">
+    <div class="container">
+      <p class="section-label fade-up">Use cases</p>
+      <h2 class="section-title fade-up">Use Cases</h2>
+      <div class="cards cards-3 fade-up" style="margin-top:32px;">
+        <div class="card">
+          <h3>Low-Code / No-Code Platforms</h3>
+          <p>Integrate printing capabilities into low-code or no-code environments to achieve true end-to-end automation in your business workflows.</p>
+        </div>
+        <div class="card">
+          <h3>SaaS Products</h3>
+          <p>Add printing functionality to your SaaS product without developing a local client or adapting drivers.</p>
+        </div>
+        <div class="card">
+          <h3>Custom Enterprise Systems</h3>
+          <p>Order, report, and label printing in ERP, WMS, OMS and other systems — all handled by a single API.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-            const duplex = document.getElementById('duplex').value.trim();
-            if (duplex) payload.duplex = duplex;
+  <!-- FAQ -->
+  <section class="section snap">
+    <div class="container">
+      <p class="section-label fade-up">FAQ</p>
+      <h2 class="section-title fade-up">FAQ</h2>
+      <div class="faq-list fade-up" style="margin-top:32px;">
+        <div class="faq-item">
+          <button class="faq-q">How is this different from traditional cloud printing?</button>
+          <div class="faq-a"><div class="faq-a-inner">Traditional cloud printing usually hands files over to the server for processing. ZeroPrint's cloud only relays messages — files are fetched and printed directly by the local client from the URL you provide. The cloud never interprets the content.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">What types of systems can integrate?</button>
+          <div class="faq-a"><div class="faq-a-inner">Any system that can send HTTP requests can integrate — whether it's a custom system, a low-code platform, or a SaaS product. There is no dependency on a specific programming language or runtime.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Where should files be stored?</button>
+          <div class="faq-a"><div class="faq-a-inner">You can continue using your existing file storage. Files can be at public URLs or internal network addresses — as long as the client can access the HTTP/HTTPS URL, it works. Files never pass through the ZeroPrint cloud.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">What file formats are supported?</button>
+          <div class="faq-a"><div class="faq-a-inner">PDF, XPS, Office documents (Word/Excel/PowerPoint), OpenDocument, common image formats, and HTML pages.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">What printers are supported?</button>
+          <div class="faq-a"><div class="faq-a-inner">Supports local printers on Windows, regardless of brand or model.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Does the sender need to install the client?</button>
+          <div class="faq-a"><div class="faq-a-inner">No. The sender only needs to be able to send HTTP requests — whether from a low-code platform, custom system, or script. The client only needs to be installed on the Windows PC connected to the printer.</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-            const color = document.getElementById('color').value.trim();
-            if (color) payload.color = color;
+  <!-- CTA -->
+  <section class="section snap">
+    <div class="container text-center">
+      <h2 class="section-title fade-up" style="max-width:none;">Ready to integrate printing into your workflow?</h2>
+      <p class="section-desc fade-up" style="margin:12px auto 32px;text-align:center;">7-day free trial with full features — no conditions, no strings attached.</p>
+      <div class="fade-up" style="display:flex;gap:12px;justify-content:center;">
+        <a href="docs.html" class="btn btn-primary">API Docs</a>
+        <a href="contact.html" class="btn btn-outline">Contact Us</a>
+      </div>
+    </div>
+  </section>
+</main>
 
-            const orientation = document.getElementById('orientation').value.trim();
-            if (orientation) payload.orientation = orientation;
+<footer>
+  <div class="footer-inner">
+    <span>&copy; 2026 ZeroPrint</span>
+    <div class="footer-links">
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
+</footer>
 
-            const resolution = document.getElementById('resolution').value.trim();
-            if (resolution) payload.resolution = resolution;
+<script>
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+}, { threshold: 0.15 });
+document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
 
-            const id = document.getElementById('id').value.trim();
-            if (id) payload.id = id;
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 10);
+});
 
-            const callbackUrl = document.getElementById('callbackUrl').value.trim();
-            if (callbackUrl) payload.callbackUrl = callbackUrl;
+document.getElementById('navToggle').addEventListener('click', () => {
+  document.getElementById('navLinks').classList.toggle('open');
+});
 
-            return payload;
-        }
-
-        function randomBytes(length) {
-            const array = new Uint8Array(length);
-            crypto.getRandomValues(array);
-            return array;
-        }
-
-        function arrayBufferToBase64(buffer) {
-            const bytes = new Uint8Array(buffer);
-            let binary = '';
-            for (let i = 0; i < bytes.byteLength; i++) {
-                binary += String.fromCharCode(bytes[i]);
-            }
-            return btoa(binary);
-        }
-
-        function base64ToArrayBuffer(base64) {
-            const binary = atob(base64);
-            const bytes = new Uint8Array(binary.length);
-            for (let i = 0; i < binary.length; i++) {
-                bytes[i] = binary.charCodeAt(i);
-            }
-            return bytes.buffer;
-        }
-
-        async function aesEncrypt(data, key) {
-            const encoder = new TextEncoder();
-            const dataBuffer = encoder.encode(JSON.stringify(data));
-            const nonce = randomBytes(12);
-            const iv = nonce;
-            const encrypted = await crypto.subtle.encrypt({ name: 'AES-GCM', iv: iv }, key, dataBuffer);
-            return {
-                ciphertext: new Uint8Array(encrypted),
-                nonce: nonce
-            };
-        }
-
-        async function rsaEncrypt(data, publicKey) {
-            const encrypted = await crypto.subtle.encrypt({ name: 'RSA-OAEP', hash: 'SHA-256' }, publicKey, data);
-            return new Uint8Array(encrypted);
-        }
-
-        async function importPublicKey(publicKeyBase64) {
-            const binaryDer = base64ToArrayBuffer(publicKeyBase64.replace(/\s/g, ''));
-            return await crypto.subtle.importKey(
-                'spki',
-                binaryDer, { name: 'RSA-OAEP', hash: 'SHA-256' },
-                true, ['encrypt']
-            );
-        }
-
-        async function encryptData(payload, publicKeyBase64) {
-            try {
-                const aesKey = await crypto.subtle.generateKey({ name: 'AES-GCM', length: 256 }, true, ['encrypt']);
-                const { ciphertext, nonce } = await aesEncrypt(payload, aesKey);
-                const aesKeyRaw = await crypto.subtle.exportKey('raw', aesKey);
-                const publicKey = await importPublicKey(publicKeyBase64);
-                const encryptedAesKey = await rsaEncrypt(aesKeyRaw, publicKey);
-
-                const combined = new Uint8Array(encryptedAesKey.length + nonce.length + ciphertext.length);
-                combined.set(encryptedAesKey, 0);
-                combined.set(nonce, encryptedAesKey.length);
-                combined.set(ciphertext, encryptedAesKey.length + nonce.length);
-                return arrayBufferToBase64(combined.buffer);
-            } catch (error) {
-                throw new Error(`加密失败: ${error.message}`);
-            }
-        }
-
-        // ============================================================
-        //  核心逻辑
-        // ============================================================
-
-        async function sendPrintTask() {
-            const target = document.getElementById('target').value.trim();
-            const mode = document.querySelector('input[name="mode"]:checked').value;
-            const publicKey = document.getElementById('publicKey').value.trim();
-
-            if (!target) {
-                showResult('❌ 错误: 请填写打印机 ID', 'error');
-                return;
-            }
-
-            const payload = buildPayload();
-            if (!payload.url) {
-                showResult('❌ 错误: 请填写文档地址', 'error');
-                return;
-            }
-
-            try {
-                let data;
-
-                if (mode === 'plaintext') {
-                    data = JSON.stringify(payload);
-                } else if (mode === 'base64') {
-                    data = stringToBase64(JSON.stringify(payload));
-                } else if (mode === 'encrypted') {
-                    if (!publicKey) {
-                        showResult('❌ 错误: 加密模式需要提供公钥', 'error');
-                        return;
-                    }
-                    data = await encryptData(payload, publicKey);
-                }
-
-                const requestBody = { target, data };
-
-                showResult('⏳ 发送中...', 'info');
-
-                const response = await fetch('https://print.pockethost.io/api/print', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(requestBody)
-                });
-
-                let result;
-                if (response.status === 200 || response.status === 204) {
-                    result = { status: response.status, message: 'Success' };
-                } else {
-                    try {
-                        result = await response.json();
-                    } catch {
-                        result = { status: response.status, message: response.statusText };
-                    }
-                }
-
-                if (response.ok) {
-                    showResult(
-                        `✅ 成功!\n\n请求体:\n${JSON.stringify(requestBody, null, 2)}\n\n响应 (${response.status}):\n${JSON.stringify(result, null, 2)}`,
-                        'success');
-                } else {
-                    showResult(
-                        `❌ 失败 (HTTP ${response.status})\n\n请求体:\n${JSON.stringify(requestBody, null, 2)}\n\n响应:\n${JSON.stringify(result, null, 2)}`,
-                        'error');
-                }
-            } catch (error) {
-                showResult(`❌ 请求失败: ${error.message}`, 'error');
-            }
-        }
-
-        async function previewData() {
-            const mode = document.querySelector('input[name="mode"]:checked').value;
-            const publicKey = document.getElementById('publicKey').value.trim();
-
-            const payload = buildPayload();
-            if (!payload.url) {
-                showResult('❌ 错误: 请填写文档地址', 'error');
-                return;
-            }
-
-            try {
-                let data;
-
-                if (mode === 'plaintext') {
-                    data = JSON.stringify(payload);
-                } else if (mode === 'base64') {
-                    data = stringToBase64(JSON.stringify(payload));
-                } else if (mode === 'encrypted') {
-                    if (!publicKey) {
-                        showResult('❌ 错误: 加密模式需要提供公钥', 'error');
-                        return;
-                    }
-                    data = await encryptData(payload, publicKey);
-                }
-
-                showResult(`📋 Data 内容 (${mode}):\n\n${data}`, 'success');
-            } catch (error) {
-                showResult(`❌ 生成失败: ${error.message}`, 'error');
-            }
-        }
-
-        function showResult(message, type) {
-            const resultSection = document.getElementById('resultSection');
-            const resultContent = document.getElementById('resultContent');
-
-            resultSection.classList.remove('hidden');
-            resultSection.style.display = 'flex';
-
-            if (type === 'success') {
-                resultContent.innerHTML = `<span class="status-success">${message}</span>`;
-            } else if (type === 'error') {
-                resultContent.innerHTML = `<span class="status-error">${message}</span>`;
-            } else if (type === 'info') {
-                resultContent.innerHTML = `<span class="status-info">${message}</span>`;
-            } else {
-                resultContent.textContent = message;
-            }
-
-            resultSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        }
-
-        function clearForm() {
-            document.getElementById('target').value = '';
-            document.getElementById('url').value = '';
-            document.getElementById('copies').value = '';
-            document.getElementById('pageSize').value = '';
-            document.getElementById('duplex').value = '';
-            document.getElementById('color').value = '';
-            document.getElementById('orientation').value = '';
-            document.getElementById('resolution').value = '';
-            document.getElementById('id').value = '';
-            document.getElementById('callbackUrl').value = '';
-            document.getElementById('publicKey').value = '';
-            document.getElementById('resultSection').classList.add('hidden');
-            document.getElementById('resultSection').style.display = 'none';
-        }
-    </script>
+document.querySelectorAll('.faq-q').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.parentElement;
+    const wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+    if (!wasOpen) item.classList.add('open');
+  });
+});
+</script>
 
 </body>
-
 </html>

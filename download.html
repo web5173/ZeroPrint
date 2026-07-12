@@ -1,0 +1,174 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Client Download — ZeroPrint</title>
+  <meta name="description" content="How to get the ZeroPrint client? Download the Windows client (~7MB), supports Windows 10+. Start receiving HTTP API print jobs immediately after installation.">
+  <meta property="og:title" content="Client Download — ZeroPrint">
+  <meta property="og:description" content="How to get the ZeroPrint client? Download the Windows client (~7MB), supports Windows 10+. Start receiving HTTP API print jobs immediately after installation.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://webappprint.com/download.html">
+  <meta property="og:site_name" content="ZeroPrint">
+  <meta property="og:locale" content="en_US">
+  <link rel="canonical" href="https://webappprint.com/download.html">
+  <meta name="keywords" content="ZeroPrint download,cloud print client,Windows print software,print client,PrintNode alternative,ezeep alternative,remote printing software">
+  <link rel="stylesheet" href="style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "ZeroPrint Windows Client",
+    "url": "https://webappprint.com/download.html",
+    "description": "ZeroPrint Windows client, approximately 7MB installer, supporting Windows 10 and later. Receive HTTP API print jobs after installation.",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Windows 10+",
+    "fileSize": "7MB",
+    "softwareVersion": "1.0",
+    "isPartOf": {
+      "@type": "SoftwareApplication",
+      "name": "ZeroPrint",
+      "url": "https://webappprint.com/"
+    },
+    "installUrl": "https://webappprint.com/download.html"
+  }
+  </script>
+  <link rel="icon" href="favicon.png" type="image/png">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "url": "https://webappprint.com/download.html",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Why only a Windows client?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "ZeroPrint currently only offers a Windows client. In commercial printing scenarios, printer drivers and Office document processing have the most mature compatibility on the Windows platform, covering everything from traditional dot-matrix printers to modern receipt printers. There are no plans to develop for other platforms at this time. The client only needs to be installed on the Windows computer connected to the printer. Print jobs are initiated via standard HTTP requests with no restrictions on the source platform — Linux, Mac, mobile devices, or cloud services can all be used."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">Zero<span>Print</span></a>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="docs.html">API Docs</a></li>
+      <li><a href="playground.html">Playground</a></li>
+      <li><a href="download.html" class="active">Client Download</a></li>
+      <li><a href="pricing.html">Pricing</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <section class="section">
+    <div class="container">
+      <div class="feature-row fade-up" style="align-items:stretch;">
+        <a href="#" class="card download-card" onclick="return false;" style="text-align:center;display:flex;align-items:center;justify-content:center;gap:16px;text-decoration:none;">
+          <img src="microsoft-store.png" alt="Microsoft Store" class="download-box-icon">
+          <div style="text-align:left;">
+            <h3 style="margin-bottom:8px;">Client Download <svg style="display:inline-block;vertical-align:middle;margin-left:4px;width:14px;height:14px;" viewBox="0 0 16 16" fill="none"><path d="M4 12L12 4M12 4H6M12 4v6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></h3>
+            <p style="margin:0;font-size:13px;color:var(--ink-3);">~7MB installer</p>
+          </div>
+        </a>
+        <div class="card" style="text-align:left;">
+          <h3 style="font-size:14px;margin-bottom:16px;">System Requirements</h3>
+          <ul class="feature-list" style="gap:12px;">
+            <li>Windows 10+ (64-bit)</li>
+            <li>At least one connected local printer</li>
+            <li>Office document printing requires Office 2010+ or WPS</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background:var(--bg-alt);">
+    <div class="container text-center">
+      <p class="section-label fade-up">Quick start</p>
+      <h2 class="section-title fade-up">Quick Start</h2>
+      <p class="section-desc fade-up" style="margin:0 auto 48px;">Three steps to get started and begin receiving print jobs.</p>
+      <div class="cards cards-3 fade-up">
+        <div class="card" style="text-align:center;">
+          <h3>1 · Install Client</h3>
+          <p>Lightweight install, no registration required.</p>
+        </div>
+        <div class="card" style="text-align:center;">
+          <h3>2 · Get Configuration</h3>
+          <p>Copy printer ID and public key from the ZeroPrint client. Enable the printer to receive tasks.</p>
+        </div>
+        <div class="card" style="text-align:center;">
+          <h3>3 · Send Print Job</h3>
+          <p>Provide printer ID and public key to your system. Send an HTTP request following the API docs to trigger printing.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container text-center">
+      <p class="section-label fade-up">File formats</p>
+      <h2 class="section-title fade-up">Supported File Formats</h2>
+      <div class="table-wrap fade-up" style="max-width:800px;margin:32px auto 0;">
+        <table>
+          <thead><tr><th>Category</th><th>Formats</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>PDF</td><td>.pdf</td><td><span class="doc-badge doc-badge-yes">Stable</span></td></tr>
+            <tr><td>XPS</td><td>.xps</td><td><span class="doc-badge doc-badge-yes">Stable</span></td></tr>
+            <tr><td>Office Documents</td><td>.doc, .docx, .xls, .xlsx, .ppt, .pptx</td><td><span class="doc-badge doc-badge-no">Experimental</span></td></tr>
+            <tr><td>OpenDocument</td><td>.odt, .ods, .odp</td><td><span class="doc-badge doc-badge-no">Experimental</span></td></tr>
+            <tr><td>Images</td><td>.jpg, .jpeg, .png, .gif, .bmp, .tif, .tiff, .webp, .svg, .heic, .heif, .avif, .jxl</td><td><span class="doc-badge doc-badge-no">Experimental</span></td></tr>
+            <tr><td>Web Pages</td><td>.html, .htm</td><td><span class="doc-badge doc-badge-no">Experimental</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="fade-up" style="margin:20px auto 0;max-width:800px;text-align:left;padding-left:2em;font-size:13px;color:var(--ink-3);">Max file size: 200MB. Supports public and intranet HTTP/HTTPS URLs. Office documents require Microsoft Office 2010+ or Kingsoft WPS installed on the client machine.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <p class="section-label fade-up">FAQ</p>
+      <h2 class="section-title fade-up">FAQ</h2>
+      <div class="faq-list fade-up" style="margin-top:32px;">
+        <div class="faq-item open">
+          <button class="faq-q">Why only a Windows client?</button>
+          <div class="faq-a"><div class="faq-a-inner">ZeroPrint currently only offers a Windows client. In commercial printing scenarios, printer drivers and Office document processing have the most mature compatibility on the Windows platform, covering everything from traditional dot-matrix printers to modern receipt printers. There are no plans to develop for other platforms at this time. The client only needs to be installed on the Windows computer connected to the printer. Print jobs are initiated via standard HTTP requests with no restrictions on the source platform — Linux, Mac, mobile devices, or cloud services can all be used.</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <span>&copy; 2026 ZeroPrint</span>
+    <div class="footer-links">
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+}, { threshold: 0.15 });
+document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+window.addEventListener('scroll', () => { document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 10); });
+document.getElementById('navToggle').addEventListener('click', () => { document.getElementById('navLinks').classList.toggle('open'); });
+</script>
+
+</body>
+</html>
