@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Client Download — ZeroPrint</title>
-  <meta name="description" content="How to get the ZeroPrint client? Download the Windows client (~7MB), supports Windows 10+. Start receiving HTTP API print jobs immediately after installation.">
-  <meta property="og:title" content="Client Download — ZeroPrint">
-  <meta property="og:description" content="How to get the ZeroPrint client? Download the Windows client (~7MB), supports Windows 10+. Start receiving HTTP API print jobs immediately after installation.">
+  <title>Download ZeroPrint for Windows — Microsoft Store</title>
+  <meta name="description" content="Download ZeroPrint Windows client from the Microsoft Store (~7MB). Supports Windows 10+. Install and start receiving HTTP API print jobs immediately.">
+  <meta property="og:title" content="Download ZeroPrint for Windows — Microsoft Store">
+  <meta property="og:description" content="Download ZeroPrint Windows client from the Microsoft Store (~7MB). Supports Windows 10+. Install and start receiving HTTP API print jobs immediately.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://webappprint.com/download.html">
   <meta property="og:site_name" content="ZeroPrint">
@@ -30,7 +30,7 @@
       "name": "ZeroPrint",
       "url": "https://webappprint.com/"
     },
-    "installUrl": "https://webappprint.com/download.html"
+    "installUrl": "https://apps.microsoft.com/detail/9N2J4H3GJSQJ"
   }
   </script>
   <link rel="icon" href="favicon.png" type="image/png">
@@ -47,6 +47,34 @@
           "@type": "Answer",
           "text": "ZeroPrint currently only offers a Windows client. In commercial printing scenarios, printer drivers and Office document processing have the most mature compatibility on the Windows platform, covering everything from traditional dot-matrix printers to modern receipt printers. There are no plans to develop for other platforms at this time. The client only needs to be installed on the Windows computer connected to the printer. Print jobs are initiated via standard HTTP requests with no restrictions on the source platform — Linux, Mac, mobile devices, or cloud services can all be used."
         }
+      }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "How to install and configure ZeroPrint",
+    "description": "Install ZeroPrint from the Microsoft Store, get your printer configuration, and start sending print jobs via HTTP API.",
+    "url": "https://webappprint.com/download.html",
+    "step": [
+      {
+        "@type": "HowToStep",
+        "name": "Install the client",
+        "text": "Download ZeroPrint from the Microsoft Store and install it on a Windows 10+ computer connected to a local printer.",
+        "url": "https://apps.microsoft.com/detail/9N2J4H3GJSQJ"
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Get configuration",
+        "text": "Open the ZeroPrint client and copy the printer ID and public key. This identifies the target printer and enables encrypted communication."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Send a print job",
+        "text": "Send an HTTP POST request to the ZeroPrint API with the printer ID and public key. The client will download the file from your URL and print it locally.",
+        "url": "https://webappprint.com/docs.html"
       }
     ]
   }
@@ -74,12 +102,13 @@
 <main>
   <section class="section">
     <div class="container">
+      <h1 class="section-title fade-up" style="margin-bottom:32px;">Download ZeroPrint Client</h1>
       <div class="feature-row fade-up" style="align-items:stretch;">
-        <a href="#" class="card download-card" onclick="return false;" style="text-align:center;display:flex;align-items:center;justify-content:center;gap:16px;text-decoration:none;">
+        <a href="https://apps.microsoft.com/detail/9N2J4H3GJSQJ" target="_blank" rel="noopener noreferrer" class="card download-card" style="text-align:center;display:flex;align-items:center;justify-content:center;gap:16px;text-decoration:none;">
           <img src="microsoft-store.png" alt="Microsoft Store" class="download-box-icon">
           <div style="text-align:left;">
-            <h3 style="margin-bottom:8px;">Client Download <svg style="display:inline-block;vertical-align:middle;margin-left:4px;width:14px;height:14px;" viewBox="0 0 16 16" fill="none"><path d="M4 12L12 4M12 4H6M12 4v6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></h3>
-            <p style="margin:0;font-size:13px;color:var(--ink-3);">~7MB installer</p>
+            <h3 style="margin-bottom:8px;">Get from Microsoft Store <svg style="display:inline-block;vertical-align:middle;margin-left:4px;width:14px;height:14px;" viewBox="0 0 16 16" fill="none"><path d="M4 12L12 4M12 4H6M12 4v6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></h3>
+            <p style="margin:0;font-size:13px;color:var(--ink-3);">Free · ~7MB installer</p>
           </div>
         </a>
         <div class="card" style="text-align:left;">
@@ -101,7 +130,7 @@
       <p class="section-desc fade-up" style="margin:0 auto 48px;">Three steps to get started and begin receiving print jobs.</p>
       <div class="cards cards-3 fade-up">
         <div class="card" style="text-align:center;">
-          <h3>1 · Install Client</h3>
+          <h3>1 · <a href="https://apps.microsoft.com/detail/9N2J4H3GJSQJ" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-underline-offset:3px;">Install Client</a></h3>
           <p>Lightweight install, no registration required.</p>
         </div>
         <div class="card" style="text-align:center;">
@@ -109,7 +138,7 @@
           <p>Copy printer ID and public key from the ZeroPrint client. Enable the printer to receive tasks.</p>
         </div>
         <div class="card" style="text-align:center;">
-          <h3>3 · Send Print Job</h3>
+          <h3>3 · <a href="docs.html" style="color:inherit;text-decoration:underline;text-underline-offset:3px;">Send Print Job</a></h3>
           <p>Provide printer ID and public key to your system. Send an HTTP request following the API docs to trigger printing.</p>
         </div>
       </div>
@@ -142,7 +171,7 @@
       <p class="section-label fade-up">FAQ</p>
       <h2 class="section-title fade-up">FAQ</h2>
       <div class="faq-list fade-up" style="margin-top:32px;">
-        <div class="faq-item open">
+        <div class="faq-item">
           <button class="faq-q">Why only a Windows client?</button>
           <div class="faq-a"><div class="faq-a-inner">ZeroPrint currently only offers a Windows client. In commercial printing scenarios, printer drivers and Office document processing have the most mature compatibility on the Windows platform, covering everything from traditional dot-matrix printers to modern receipt printers. There are no plans to develop for other platforms at this time. The client only needs to be installed on the Windows computer connected to the printer. Print jobs are initiated via standard HTTP requests with no restrictions on the source platform — Linux, Mac, mobile devices, or cloud services can all be used.</div></div>
         </div>
@@ -168,6 +197,14 @@ const io = new IntersectionObserver((entries) => {
 document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
 window.addEventListener('scroll', () => { document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 10); });
 document.getElementById('navToggle').addEventListener('click', () => { document.getElementById('navLinks').classList.toggle('open'); });
+document.querySelectorAll('.faq-q').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.parentElement;
+    const wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+    if (!wasOpen) item.classList.add('open');
+  });
+});
 </script>
 
 </body>
