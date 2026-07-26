@@ -33,7 +33,6 @@
 .pg-field textarea{height:auto;min-height:80px;padding:6px 10px;resize:vertical;line-height:1.5}
 .pg-field input:focus,.pg-field textarea:focus{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent-soft)}
 .pg-actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:10px 0 14px}
-#holdBtn.active{background:var(--accent-soft);color:var(--accent);border-color:var(--accent)}
 .pg-result{display:flex;flex-direction:column;gap:10px}
 .pg-result-label{font-family:var(--font-en);font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);display:flex;align-items:center;gap:8px}
 .pg-status{font-size:11px;font-weight:600;padding:1px 7px;border-radius:3px;letter-spacing:.02em;text-transform:none}
@@ -94,7 +93,6 @@
 <div class="pg-actions fade-up">
 <button class="btn btn-accent" id="sendBtn">Send Print Request</button>
 <button class="btn btn-secondary" id="previewBtn">Preview Data</button>
-<button class="btn btn-secondary" id="holdBtn" type="button">Hold job when printer/client is offline, print after reconnect</button>
 </div>
 
 <div class="pg-result fade-up">
@@ -129,12 +127,10 @@ async function encryptData(publicKey,plaintext){
   return btoa(String.fromCharCode(...combined));
 }
 
-async function sendPrintRequest(baseUrl,target,printData,publicKey,hold){
+async function sendPrintRequest(baseUrl,target,printData,publicKey){
   const plaintext=JSON.stringify(printData);
   const data=publicKey?await encryptData(publicKey,plaintext):plaintext;
-  const body={target,data};
-  if(hold)body.hold=true;
-  const response=await fetch(baseUrl+"/api/print",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)});
+  const response=await fetch(baseUrl+"/api/print",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({target,data})});
   if(!response.ok)throw await response.json();
   return{status:"success"};
 }
@@ -165,10 +161,7 @@ async function buildRequest(){
   const publicKey=$('publicKey').value.trim();
   const plaintext=JSON.stringify(printData);
   const data=publicKey?await encryptData(publicKey,plaintext):plaintext;
-  const hold=$('holdBtn').classList.contains('active');
-  const body={target,data};
-  if(hold)body.hold=true;
-  return{baseUrl,target,body};
+  return{baseUrl,target,body:{target,data}};
 }
 
 function setReq(bodyText,statusText,statusCls){
@@ -189,12 +182,6 @@ $('previewBtn').addEventListener('click',async()=>{
   catch(err){setReq('','error','err');setRes(err.message,'error','err');}
 });
 
-$('holdBtn').addEventListener('click',()=>{
-  const btn=$('holdBtn');const active=btn.classList.toggle('active');
-  const label='Hold job when printer/client is offline, print after reconnect';
-  btn.textContent=label+(active?' ✓':'');
-});
-
 $('sendBtn').addEventListener('click',async()=>{
   const btn=$('sendBtn');const original=btn.textContent;btn.disabled=true;btn.textContent='Sending...';
   try{
@@ -202,7 +189,7 @@ $('sendBtn').addEventListener('click',async()=>{
     setReq(JSON.stringify(body,null,2),'ready','info');setRes('','sending...','info');
     const publicKey=$('publicKey').value.trim();
     const printData=buildPrintData();
-    await sendPrintRequest(baseUrl,target,printData,publicKey||null,$('holdBtn').classList.contains('active'));
+    await sendPrintRequest(baseUrl,target,printData,publicKey||null);
     setRes('{ "status": "success" }','200 OK','ok');
   }catch(err){
     const msg=(typeof err==='object'&&err.message)?err.message:(typeof err==='string'?err:JSON.stringify(err));

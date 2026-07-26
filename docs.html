@@ -120,7 +120,6 @@ Content-Type: application/json</code></pre>
               <tbody>
                 <tr><td><code>target</code></td><td>string</td><td style="color:var(--accent);font-weight:600;">Yes</td><td>Target printer ID, can be copied from the client</td></tr>
                 <tr><td><code>data</code></td><td>string</td><td style="color:var(--accent);font-weight:600;">Yes</td><td>Print job data. Plaintext JSON (debug only) or RSA+AES-256-GCM encrypted then Base64 encoded (recommended for production)</td></tr>
-                <tr><td><code>hold</code></td><td>boolean</td><td style="color:var(--ink-3);">No</td><td>Whether to hold the job when the printer/client is offline, to be printed after it comes back online. <code>true</code> holds and responds success, <code>false</code> (default) responds with code <code>PRINTER_OFFLINE</code> failure</td></tr>
               </tbody>
             </table>
           </div>
@@ -162,15 +161,14 @@ Content-Type: application/json</code></pre>
           <p><strong>Failure</strong>: HTTP 400 Bad Request</p>
           <div class="code-block">
             <pre><code>{
-  "code": "PRINTER_OFFLINE",
-  "message": "target printer is offline"
+  "code": "INVALID_REQUEST",
+  "message": "Invalid JSON format"
 }</code></pre>
           </div>
           <div class="table-wrap">
             <table>
               <thead><tr><th>code</th><th>message</th></tr></thead>
               <tbody>
-                <tr><td><code>PRINTER_OFFLINE</code></td><td>target printer is offline</td></tr>
                 <tr><td><code>INVALID_TARGET</code></td><td>target is required and must be a 64-character lowercase hex string</td></tr>
                 <tr><td><code>INVALID_DATA</code></td><td>data is required and must be a non-empty string</td></tr>
                 <tr><td><code>INVALID_REQUEST</code></td><td>Invalid JSON format</td></tr>
