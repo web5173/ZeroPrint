@@ -158,26 +158,25 @@ Content-Type: application/json</code></pre>
           </div>
           <h4>Response</h4>
           <p><strong>Success</strong>: HTTP 200 OK, no response body.</p>
-          <p><strong>Failure</strong>: HTTP 400 Bad Request</p>
+          <p><strong>Bad Request</strong>: HTTP 400 Bad Request</p>
+          <p><strong>Server Error</strong>: HTTP 500 Internal Server Error</p>
           <div class="code-block">
             <pre><code>{
-  "code": "INVALID_REQUEST",
-  "message": "Invalid JSON format"
+  "code": "INVALID_DATA",
+  "message": "data is required and must be a non-empty string"
 }</code></pre>
           </div>
           <div class="table-wrap">
             <table>
               <thead><tr><th>code</th><th>message</th></tr></thead>
               <tbody>
-                <tr><td><code>INVALID_TARGET</code></td><td>target is required and must be a 64-character lowercase hex string</td></tr>
+                <tr><td><code>INVALID_TARGET</code></td><td>target is required and must be a 64-character lowercase hex string (a-f, 0-9)</td></tr>
                 <tr><td><code>INVALID_DATA</code></td><td>data is required and must be a non-empty string</td></tr>
-                <tr><td><code>INVALID_REQUEST</code></td><td>Invalid JSON format</td></tr>
+                <tr><td><code>INTERNAL_ERROR</code></td><td>internal server error</td></tr>
               </tbody>
             </table>
           </div>
         </div>
-
-        <hr>
 
         <div class="fade-up">
           <h2 id="callback">Callback</h2>
@@ -208,8 +207,6 @@ Content-Type: application/json</code></pre>
           <blockquote><p style="margin:0;">Callback timeout: 5 seconds. HTTP status 2xx is considered success. Callback is fired regardless of print success or failure.</p></blockquote>
         </div>
 
-        <hr>
-
         <div class="fade-up">
           <h2 id="encryption">Encryption</h2>
           <p>RSA-2048 + AES-256-GCM hybrid encryption is recommended for production. Private key is stored locally on the client only; the cloud cannot decrypt.</p>
@@ -227,8 +224,6 @@ Content-Type: application/json</code></pre>
             <pre><code>[RSA-encrypted AES key (256 bytes)][GCM Nonce (12 bytes)][Ciphertext + auth tag]</code></pre>
           </div>
         </div>
-
-        <hr>
 
         <div class="fade-up">
           <h2 id="examples">Code Examples</h2>
