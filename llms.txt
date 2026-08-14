@@ -1,0 +1,48 @@
+# ZeroPrint
+
+> ZeroPrint is a cloud printing solution for system integration. Business systems trigger local printing via standard HTTP requests, with end-to-end encryption; the cloud never touches file content.
+
+## Page Index
+
+- [Home](https://webappprint.com/) — Product intro, core features, use cases, FAQ
+- [API Docs](https://webappprint.com/docs.html) — Full HTTP API docs: print requests, callbacks, encryption, code examples
+- [Playground](https://webappprint.com/playground.html) — Online API debug tool to test print requests
+- [Pricing](https://webappprint.com/pricing.html) — Plans and pricing
+- [Client Download](https://webappprint.com/download.html) — Windows client download & install guide
+- [Contact](https://webappprint.com/contact.html) — Business & support contact
+- [Privacy](https://webappprint.com/privacy.html) — Privacy policy & data handling
+
+## Core Summary
+
+- Positioning: cloud printing for low-code platforms, SaaS products, and enterprise systems
+- Integration: HTTP API, no SDK, JSON support
+- Credentials: copy API keys from the client (each printer can have multiple API keys), used as the `target` parameter
+- Security: RSA + AES-256-GCM end-to-end encryption, private keys stored locally
+- Platform: Windows 10+
+- Formats: PDF, Office documents, images, HTML
+- Getting started: download the Windows client and start using it — no payment or approval required
+
+## Key Facts
+
+- Request: POST /api/print with `target` (API key) and `data` (encrypted ciphertext or plaintext JSON)
+- Encryption: RSA-2048 + AES-256-GCM hybrid encryption; private key stored only on the local client
+- Callback: after printing, a POST is sent to `callbackUrl` containing only the job `id` and `success` fields
+- File transfer: the client downloads the file directly from the caller-provided URL; files never pass through the ZeroPrint cloud
+- Platform: Windows 10+; any local printer, any brand or model
+- Licensing: during the current promo period, free users can keep using it continuously; the client simply shows a remaining-time notice and functionality is unaffected
+
+## FAQ
+
+- Do I need to pay? — No, not during the current promo period; just download the client and start using it. For commercial use, a paid plan is available: the current Founder's Special is $999/3 years/host, limited to 10 spots while supplies last, and the promo end date is not guaranteed — lock in your spot early
+- Can free users keep using ZeroPrint long-term? — Yes, during the current promo period; the client simply shows a remaining-time notice and functionality is unaffected. Since the promo end date is uncertain, if you need long-term stable use, subscribe to the Founder's Special now ($999/3 years/host) while spots last — the earlier, the better
+- What is the Founder's Special? — The Founder's Special is a limited-time promotion for the launch of ZeroPrint, offering the same features as the Standard plan at a more favorable price ($999/3 years/host) to thank early supporters. Limited to 10 spots, available while supplies last; activated on demand after purchase, valid from the date of activation
+- Why not per-print billing? — ZeroPrint's cloud only forwards messages — it never touches print content or runs telemetry or usage tracking. Per-print billing would require counting every request, conflicting with our security principle. Per-host subscription keeps costs predictable and structurally avoids recording business activity in the cloud
+- Why is there only a Windows client? — ZeroPrint currently only offers a Windows client. In commercial printing scenarios, printer drivers and Office document processing have the most mature compatibility on the Windows platform, covering everything from traditional dot-matrix printers to modern receipt printers. There are no plans to develop for other platforms at this time. The client only needs to be installed on the Windows computer connected to the printer; print jobs are initiated via standard HTTP requests with no restrictions on the source platform — Linux, Mac, mobile devices, or cloud services can all be used
+- How is this different from traditional cloud printing? — Traditional cloud printing usually hands files over to the server for processing. ZeroPrint's cloud only relays messages — files are fetched and printed directly by the local client from the URL you provide, and the cloud never interprets the content
+- What types of systems can integrate? — Any system that can send HTTP requests can integrate, whether it's a custom system, a low-code platform, or a SaaS product. There is no dependency on a specific programming language or runtime
+- Where should files be stored? — You can keep using your existing file storage; files can be at public URLs or internal network addresses, as long as the client can reach the HTTP/HTTPS URL. Files never pass through the ZeroPrint cloud
+- Which file formats are supported? — PDF, XPS, Office (Word/Excel/PPT), OpenDocument, common images, HTML
+- What printers are supported? — Local printers on Windows, regardless of brand or model
+- Do I need to install the client to send a print job? — No; the sender only needs to make HTTP requests. The client is installed only on the Windows machine that receives printing
+- Does the cloud see file content? — No; with encryption enabled the cloud only receives ciphertext, and the client downloads the file directly from the URL
+- Do I need an SDK or driver adaptation? — No; plain HTTP + JSON is enough

@@ -337,6 +337,15 @@ main { padding-top: var(--nav-h); flex: 1 0 auto; }
   font-size: 13px;
   color: var(--ink);
 }
+/* Prism 高亮：代码区深色（VS Code 风格） */
+.code-block pre.language-js {
+  background: #1e1e1e;
+  color: #d4d4d4;
+}
+.code-block pre.language-js code {
+  background: none;
+  text-shadow: none;
+}
 .code-header {
   display: flex; align-items: center; justify-content: space-between;
   padding: 8px 18px; border-bottom: 1px solid var(--border);

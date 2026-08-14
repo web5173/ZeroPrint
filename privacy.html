@@ -13,7 +13,7 @@
   <meta property="og:locale" content="en_US">
   <link rel="canonical" href="https://webappprint.com/privacy.html">
   <meta name="keywords" content="ZeroPrint privacy,cloud print privacy,print data security">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=20260814">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -34,12 +34,12 @@
 
 <nav class="nav" id="nav">
   <div class="nav-inner">
-    <a href="index.html" class="nav-logo">Zero<span>Print</span></a>
+    <a href="/" class="nav-logo">Zero<span>Print</span></a>
     <button class="nav-toggle" id="navToggle" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
     <ul class="nav-links" id="navLinks">
-      <li><a href="index.html">Home</a></li>
+      <li><a href="/">Home</a></li>
       <li><a href="docs.html">API Docs</a></li>
       <li><a href="playground.html">Playground</a></li>
       <li><a href="download.html">Client Download</a></li>
@@ -77,7 +77,7 @@
         <h3>1.1 Information Generated and Used Locally by the Client</h3>
         <p>ZeroPrint generates and uses the following information locally on your device:</p>
         <ul>
-          <li><strong>Host ID / Fingerprint</strong>: Used to identify the current device and perform authorization queries against the cloud service. This identifier is generated locally and is primarily used for authorization verification and device identification.</li>
+          <li><strong>Host ID</strong>: Used to identify the current device and perform authorization queries against the cloud service. This identifier is generated locally and is primarily used for authorization verification and device identification.</li>
           <li><strong>Public Key</strong>: Used to enable callers to encrypt print jobs. The public key is generated locally and displayed to the user, and is typically used by the business party when making API calls.</li>
           <li><strong>Private Key</strong>: Used to decrypt encrypted jobs on the local device. The private key is generated and stored only on the client locally and is never uploaded to the cloud.</li>
         </ul>
@@ -85,7 +85,7 @@
         <h3>1.2 Necessary Information Processed by Cloud Services</h3>
         <p>To provide authorization verification and job forwarding, the cloud service may process the following information:</p>
         <ul>
-          <li><strong>Device Identifier (Host ID / Fingerprint)</strong>: Used to query authorization status.</li>
+          <li><strong>Device Identifier (Host ID)</strong>: Used to query authorization status.</li>
           <li><strong>Print Job Metadata</strong>: Includes job ID, target printer, file URL, print parameters, callback URL, etc. The cloud service processes this information as a message relay and does not participate in the generation or interpretation of print file content.</li>
           <li><strong>Callback Notification Information</strong>: After printing is completed, the client sends a result notification directly to the callback URL provided by the business party, without passing through the cloud.</li>
         </ul>

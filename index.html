@@ -13,7 +13,10 @@
   <meta property="og:locale" content="en_US">
   <link rel="canonical" href="https://webappprint.com/">
   <meta name="keywords" content="cloud printing,HTTP printing,remote printing,print API,CUPS,end-to-end encryption,silent printing,backend printing,system integration printing,SaaS printing,low-code printing,no-code printing,ERP printing,WMS printing,PrintNode,ezeep,Printix,PrinterLogic,PaperCut,ThinPrint,Microsoft Universal Print,Zapier,Make,Airtable,Notion,Monday.com,Salesforce,HubSpot,Power Automate,n8n,Workato,ServiceNow,Retool,Bubble,Webflow">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=20260814">
+  <link rel="stylesheet" href="prism/prism-vsc-dark-plus.css?v=20260814">
+  <script src="prism/prism.min.js?v=20260814"></script>
+  <script src="prism/prism-javascript.min.js?v=20260814"></script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -129,12 +132,12 @@
 
 <nav class="nav" id="nav">
   <div class="nav-inner">
-    <a href="index.html" class="nav-logo">Zero<span>Print</span></a>
+    <a href="/" class="nav-logo">Zero<span>Print</span></a>
     <button class="nav-toggle" id="navToggle" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
     <ul class="nav-links" id="navLinks">
-      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="/" class="active">Home</a></li>
       <li><a href="docs.html">API Docs</a></li>
       <li><a href="playground.html">Playground</a></li>
       <li><a href="download.html">Client Download</a></li>
@@ -154,7 +157,7 @@
         <p class="hero-sub fade-up delay-1">ZeroPrint is a cloud printing solution designed for system integration. Your business system sends a request, and the local client handles the printing. The cloud only relays messages — it never touches file content.</p>
         <div class="hero-actions fade-up delay-2">
           <a href="playground.html" class="btn btn-primary">Playground</a>
-          <a href="pricing.html" class="btn btn-outline">7-Day Free Trial</a>
+          <a href="pricing.html" class="btn btn-outline">Free Trial</a>
         </div>
       </div>
     </div>
@@ -173,15 +176,15 @@
         <div class="value-full-visual fade-up delay-1" style="min-width:0;">
           <div class="code-block" style="margin:0;width:100%;">
             <div class="code-header"><span class="code-lang">JavaScript</span></div>
-            <pre><code>fetch("https://&lt;Api Endpoint&gt;/api/print", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({
-    target: "&lt;Printer ID&gt;",
-    data: JSON.stringify({
-      url: "https://example.com/invoice.pdf"
+            <pre class="language-js"><code class="language-js">fetch("https://&lt;Api Endpoint&gt;/api/print", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+        target: "&lt;API key&gt;",
+        data: JSON.stringify({
+            url: "https://example.com/invoice.pdf"
+        })
     })
-  })
 })</code></pre>
           </div>
         </div>
@@ -435,7 +438,7 @@
   <section class="section snap">
     <div class="container text-center">
       <h2 class="section-title fade-up" style="max-width:none;">Ready to integrate printing into your workflow?</h2>
-      <p class="section-desc fade-up" style="margin:12px auto 32px;text-align:center;">7-day free trial with full features — no conditions, no strings attached.</p>
+      <p class="section-desc fade-up" style="margin:12px auto 32px;text-align:center;">Free trial with full features — no conditions, no strings attached.</p>
       <div class="fade-up" style="display:flex;gap:12px;justify-content:center;">
         <a href="docs.html" class="btn btn-primary">API Docs</a>
         <a href="contact.html" class="btn btn-outline">Contact Us</a>

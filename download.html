@@ -13,7 +13,7 @@
   <meta property="og:locale" content="en_US">
   <link rel="canonical" href="https://webappprint.com/download.html">
   <meta name="keywords" content="ZeroPrint download,cloud print client,Windows print software,print client,PrintNode alternative,ezeep alternative,remote printing software">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=20260814">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -68,12 +68,12 @@
       {
         "@type": "HowToStep",
         "name": "Get configuration",
-        "text": "Open the ZeroPrint client and copy the printer ID and public key. This identifies the target printer and enables encrypted communication."
+        "text": "Open the ZeroPrint client and copy the API key and public key. This identifies the target printer and enables encrypted communication."
       },
       {
         "@type": "HowToStep",
         "name": "Send a print job",
-        "text": "Send an HTTP POST request to the ZeroPrint API with the printer ID and public key. The client will download the file from your URL and print it locally.",
+        "text": "Send an HTTP POST request to the ZeroPrint API with the API key and public key. The client will download the file from your URL and print it locally.",
         "url": "https://webappprint.com/docs.html"
       }
     ]
@@ -116,7 +116,6 @@
           <ul class="feature-list" style="gap:12px;">
             <li>Windows 10+ (64-bit)</li>
             <li>At least one connected local printer</li>
-            <li>Office document printing requires Office 2010+</li>
           </ul>
         </div>
       </div>
@@ -135,11 +134,11 @@
         </div>
         <div class="card" style="text-align:center;">
           <h3>2 · Get Configuration</h3>
-          <p>Copy printer ID and public key from the ZeroPrint client. Enable the printer to receive tasks.</p>
+          <p>Copy the API key and public key from the ZeroPrint client.</p>
         </div>
         <div class="card" style="text-align:center;">
           <h3>3 · <a href="docs.html" style="color:inherit;text-decoration:underline;text-underline-offset:3px;">Send Print Job</a></h3>
-          <p>Provide printer ID and public key to your system. Send an HTTP request following the API docs to trigger printing.</p>
+          <p>Provide the API key and public key to your system. Send an HTTP request following the API docs to trigger printing.</p>
         </div>
       </div>
     </div>
@@ -162,7 +161,7 @@
           </tbody>
         </table>
       </div>
-      <p class="fade-up" style="margin:20px auto 0;max-width:800px;text-align:left;padding-left:2em;font-size:13px;color:var(--ink-3);">Max file size: 200MB. Supports public and intranet HTTP/HTTPS URLs. Office documents require Microsoft Office 2010+ on the client machine.</p>
+      <p class="fade-up" style="margin:20px auto 0;max-width:800px;text-align:left;padding-left:2em;font-size:13px;color:var(--ink-3);">Printing Office documents requires Microsoft Office 2010+ installed on the client machine.</p>
     </div>
   </section>
 
