@@ -686,7 +686,7 @@ footer { border-top: 1px solid var(--border); padding: 36px 0; margin-top: 0; sc
   .compare-table { font-size: 12px; }
   .compare-table th, .compare-table td { padding: 8px 6px; }
   .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-  .doc-layout { grid-template-columns: 1fr; gap: 0; }
+  .doc-layout { grid-template-columns: minmax(0, 1fr); gap: 0; }
   .doc-sidebar { display: none; }
   .doc-content pre, .doc-content code { white-space: pre-wrap; word-break: break-all; }
   .doc-content table { table-layout: fixed; }
