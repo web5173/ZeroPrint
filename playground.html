@@ -4,22 +4,29 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Playground — ZeroPrint</title>
-<meta name="description" content="How to test ZeroPrint print API? Use the online debug tool to enter your API endpoint, API key, and file URL with optional end-to-end encryption.">
+<meta name="description" content="How to test ZeroPrint print API? Use the online debug tool to enter your API endpoint, printer ID, and file URL with optional end-to-end encryption.">
 <meta property="og:title" content="Playground — ZeroPrint">
-<meta property="og:description" content="How to test ZeroPrint print API? Use the online debug tool to enter your API endpoint, API key, and file URL with optional end-to-end encryption.">
+<meta property="og:description" content="How to test ZeroPrint print API? Use the online debug tool to enter your API endpoint, printer ID, and file URL with optional end-to-end encryption.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://webappprint.com/playground.html">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://webappprint.com/favicon.png">
+<meta property="og:image:secure_url" content="https://webappprint.com/favicon.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:alt" content="ZeroPrint">
 <meta property="og:site_name" content="ZeroPrint">
 <meta name="keywords" content="ZeroPrint playground,online print test,print API debug,HTTP print testing,PrintNode alternative">
 <link rel="canonical" href="https://webappprint.com/playground.html">
+<link rel="alternate" hreflang="zh-CN" href="https://webappprint.cn/playground.html">
+<link rel="alternate" hreflang="en" href="https://webappprint.com/playground.html">
+<link rel="alternate" hreflang="x-default" href="https://webappprint.com/playground.html">
 <link rel="icon" href="favicon.png" type="image/png">
 <link rel="stylesheet" href="style.css?v=2026081418">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebPage","name":"Playground — ZeroPrint","url":"https://webappprint.com/playground.html","description":"How to test ZeroPrint print API? Use the online debug tool to enter your API endpoint, API key, and file URL with optional end-to-end encryption.","isPartOf":{"@type":"SoftwareApplication","name":"ZeroPrint","url":"https://webappprint.com/"}}
+{"@context":"https://schema.org","@type":"WebPage","name":"Playground — ZeroPrint","url":"https://webappprint.com/playground.html","description":"How to test ZeroPrint print API? Use the online debug tool to enter your API endpoint, printer ID, and file URL with optional end-to-end encryption.","isPartOf":{"@type":"SoftwareApplication","name":"ZeroPrint","url":"https://webappprint.com/"}}
 </script>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"SoftwareApplication","name":"ZeroPrint Playground","url":"https://webappprint.com/playground.html","description":"How to test ZeroPrint print API? Use the online debug tool to enter your API endpoint, API key, and file URL with optional end-to-end encryption.","applicationCategory":"DeveloperApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"ZeroPrint Playground","url":"https://webappprint.com/playground.html","description":"How to test ZeroPrint print API? Use the online debug tool to enter your API endpoint, printer ID, and file URL with optional end-to-end encryption.","applicationCategory":"DeveloperApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
 </script>
 <style>
 .pg-card{padding:0;margin-bottom:32px}
@@ -67,7 +74,7 @@
 <div class="pg-grid" style="gap:10px;">
 <div class="pg-field"><label for="apiEndpoint">Api Endpoint <span style="color:#ff5722">*</span></label><input type="text" id="apiEndpoint" value="https://print.pockethost.io" placeholder="Copy from client" autocomplete="off" spellcheck="false"></div>
 <div class="pg-grid pg-grid-2" style="gap:10px;">
-<div class="pg-field"><label for="printerId">API Key <span style="color:#ff5722">*</span></label><input type="text" id="printerId" placeholder="Copy from client" autocomplete="off" spellcheck="false"></div>
+<div class="pg-field"><label for="printerId">Printer ID <span style="color:#ff5722">*</span></label><input type="text" id="printerId" placeholder="Copy from client" autocomplete="off" spellcheck="false"></div>
 <div class="pg-field"><label for="fileUrl">File URL <span style="color:#ff5722">*</span></label><input type="text" id="fileUrl" placeholder="https://example.com/document.pdf" autocomplete="off" spellcheck="false"></div>
 </div>
 </div>
@@ -155,7 +162,7 @@ async function buildRequest(){
   const baseUrl=$('apiEndpoint').value.trim().replace(/\/+$/,'');
   const target=$('printerId').value.trim();
   if(!baseUrl)throw new Error('Api Endpoint is required.');
-  if(!target)throw new Error('API key is required.');
+  if(!target)throw new Error('Printer ID is required.');
   if(!$('fileUrl').value.trim())throw new Error('File URL is required.');
   const printData=buildPrintData();
   const publicKey=$('publicKey').value.trim();

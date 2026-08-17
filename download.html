@@ -11,7 +11,14 @@
   <meta property="og:url" content="https://webappprint.com/download.html">
   <meta property="og:site_name" content="ZeroPrint">
   <meta property="og:locale" content="en_US">
+  <meta property="og:image" content="https://webappprint.com/favicon.png">
+  <meta property="og:image:secure_url" content="https://webappprint.com/favicon.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:alt" content="ZeroPrint">
   <link rel="canonical" href="https://webappprint.com/download.html">
+  <link rel="alternate" hreflang="zh-CN" href="https://webappprint.cn/download.html">
+  <link rel="alternate" hreflang="en" href="https://webappprint.com/download.html">
+  <link rel="alternate" hreflang="x-default" href="https://webappprint.com/download.html">
   <meta name="keywords" content="ZeroPrint download,cloud print client,Windows print software,print client,PrintNode alternative,ezeep alternative,remote printing software">
   <link rel="stylesheet" href="style.css?v=2026081418">
   <script type="application/ld+json">
@@ -68,12 +75,12 @@
       {
         "@type": "HowToStep",
         "name": "Get configuration",
-        "text": "Open the ZeroPrint client and copy the API key and public key. This identifies the target printer and enables encrypted communication."
+        "text": "Open the ZeroPrint client and copy the printer ID and public key. This identifies the target printer and enables encrypted communication."
       },
       {
         "@type": "HowToStep",
         "name": "Send a print job",
-        "text": "Send an HTTP POST request to the ZeroPrint API with the API key and public key. The client will download the file from your URL and print it locally.",
+        "text": "Send an HTTP POST request to the ZeroPrint API with the printer ID and public key. The client will download the file from your URL and print it locally.",
         "url": "https://webappprint.com/docs.html"
       }
     ]
@@ -134,11 +141,11 @@
         </div>
         <div class="card" style="text-align:center;">
           <h3>2 · Get Configuration</h3>
-          <p>Copy the API key and public key from the ZeroPrint client.</p>
+          <p>Copy the printer ID and public key from the ZeroPrint client.</p>
         </div>
         <div class="card" style="text-align:center;">
           <h3>3 · <a href="docs.html" style="color:inherit;text-decoration:underline;text-underline-offset:3px;">Send Print Job</a></h3>
-          <p>Provide the API key and public key to your system. Send an HTTP request following the API docs to trigger printing.</p>
+          <p>Provide the printer ID and public key to your system. Send an HTTP request following the API docs to trigger printing.</p>
         </div>
       </div>
     </div>

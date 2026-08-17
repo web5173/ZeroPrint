@@ -16,7 +16,7 @@
 
 - Positioning: cloud printing for low-code platforms, SaaS products, and enterprise systems
 - Integration: HTTP API, no SDK, JSON support
-- Credentials: copy API keys from the client (each printer can have multiple API keys), used as the `target` parameter
+- Credentials: copy printer IDs from the client (each printer can have multiple printer IDs), used as the `target` parameter
 - Security: RSA + AES-256-GCM end-to-end encryption, private keys stored locally
 - Platform: Windows 10+
 - Formats: PDF, Office documents, images, HTML
@@ -24,7 +24,7 @@
 
 ## Key Facts
 
-- Request: POST /api/print with `target` (API key) and `data` (encrypted ciphertext or plaintext JSON)
+- Request: POST /api/print with `target` (printer ID) and `data` (encrypted ciphertext or plaintext JSON)
 - Encryption: RSA-2048 + AES-256-GCM hybrid encryption; private key stored only on the local client
 - Callback: after printing, a POST is sent to `callbackUrl` containing only the job `id` and `success` fields
 - File transfer: the client downloads the file directly from the caller-provided URL; files never pass through the ZeroPrint cloud

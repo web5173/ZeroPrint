@@ -11,7 +11,14 @@
   <meta property="og:url" content="https://webappprint.com/">
   <meta property="og:site_name" content="ZeroPrint">
   <meta property="og:locale" content="en_US">
+  <meta property="og:image" content="https://webappprint.com/favicon.png">
+  <meta property="og:image:secure_url" content="https://webappprint.com/favicon.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:alt" content="ZeroPrint">
   <link rel="canonical" href="https://webappprint.com/">
+  <link rel="alternate" hreflang="zh-CN" href="https://webappprint.cn/">
+  <link rel="alternate" hreflang="en" href="https://webappprint.com/">
+  <link rel="alternate" hreflang="x-default" href="https://webappprint.com/">
   <meta name="keywords" content="cloud printing,HTTP printing,remote printing,print API,CUPS,end-to-end encryption,silent printing,backend printing,system integration printing,SaaS printing,low-code printing,no-code printing,ERP printing,WMS printing,PrintNode,ezeep,Printix,PrinterLogic,PaperCut,ThinPrint,Microsoft Universal Print,Zapier,Make,Airtable,Notion,Monday.com,Salesforce,HubSpot,Power Automate,n8n,Workato,ServiceNow,Retool,Bubble,Webflow">
   <link rel="stylesheet" href="style.css?v=2026081418">
   <link rel="stylesheet" href="prism/prism-vsc-dark-plus.css?v=2026081418">
@@ -180,7 +187,7 @@
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-        target: "&lt;API key&gt;",
+        target: "&lt;printer ID&gt;",
         data: JSON.stringify({
             url: "https://example.com/invoice.pdf"
         })

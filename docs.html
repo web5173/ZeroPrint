@@ -11,7 +11,14 @@
   <meta property="og:url" content="https://webappprint.com/docs.html">
   <meta property="og:site_name" content="ZeroPrint">
   <meta property="og:locale" content="en_US">
+  <meta property="og:image" content="https://webappprint.com/favicon.png">
+  <meta property="og:image:secure_url" content="https://webappprint.com/favicon.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:alt" content="ZeroPrint">
   <link rel="canonical" href="https://webappprint.com/docs.html">
+  <link rel="alternate" hreflang="zh-CN" href="https://webappprint.cn/docs.html">
+  <link rel="alternate" hreflang="en" href="https://webappprint.com/docs.html">
+  <link rel="alternate" hreflang="x-default" href="https://webappprint.com/docs.html">
   <meta name="keywords" content="ZeroPrint API,print API docs,HTTP print API,print callback,print encryption,Node.js print,browser print,PrintNode,ezeep,Printix,PrinterLogic,PaperCut,Zapier,Make,Airtable,Notion,Power Automate,n8n">
   <script type="application/ld+json">
   {
@@ -55,12 +62,12 @@
       {
         "@type": "HowToStep",
         "name": "Get configuration",
-        "text": "Copy the Api Endpoint, API key, and public key from the ZeroPrint client."
+        "text": "Copy the Api Endpoint, printer ID, and public key from the ZeroPrint client."
       },
       {
         "@type": "HowToStep",
         "name": "Send the print request",
-        "text": "Send a POST /api/print request with target (API key) and data (print job payload). RSA+AES-256-GCM encryption is recommended for production."
+        "text": "Send a POST /api/print request with target (printer ID) and data (print job payload). RSA+AES-256-GCM encryption is recommended for production."
       },
       {
         "@type": "HowToStep",
@@ -121,7 +128,7 @@ Content-Type: application/json</code></pre>
             <table>
               <thead><tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
               <tbody>
-                <tr><td><code>target</code></td><td>string</td><td style="color:var(--accent);font-weight:600;">Yes</td><td>Target API key, can be copied from the client</td></tr>
+                <tr><td><code>target</code></td><td>string</td><td style="color:var(--accent);font-weight:600;">Yes</td><td>Target printer ID, can be copied from the client</td></tr>
                 <tr><td><code>data</code></td><td>string</td><td style="color:var(--accent);font-weight:600;">Yes</td><td>Print job data. Plaintext JSON (debug only) or RSA+AES-256-GCM encrypted then Base64 encoded (recommended for production)</td></tr>
               </tbody>
             </table>
@@ -130,14 +137,14 @@ Content-Type: application/json</code></pre>
           <p style="font-weight:600;color:var(--ink);font-size:14px;">Plaintext Mode (debug only)</p>
           <div class="code-block">
             <pre><code>{
-  "target": "&lt;API key&gt;",
+  "target": "&lt;printer ID&gt;",
   "data": "{\"url\":\"https://example.com/document.pdf\",\"copies\":1,\"id\":\"order_123\",\"callbackUrl\":\"https://your-server.com/callback\"}"
 }</code></pre>
           </div>
           <p style="font-weight:600;color:var(--ink);font-size:14px;">Encrypted Mode (recommended for production)</p>
           <div class="code-block">
             <pre><code>{
-  "target": "&lt;API key&gt;",
+  "target": "&lt;printer ID&gt;",
   "data": "SGVsbG8gV29ybGQgZm9yIGVuY3J5cHRlZC9pbnRlcmFjdGlvbiBvbmx5..."
 }</code></pre>
           </div>
@@ -276,7 +283,7 @@ async function sendPrintRequest(target, printData, publicKey) {
 }
 
 // ── Build request data ──
-const target = "&lt;API key&gt;";
+const target = "&lt;printer ID&gt;";
 const publicKey = "MIIBIjANBgkqhkiG9w0BAQEFAAO...";
 const printData = {
     url: "https://example.com/document.pdf",
@@ -340,7 +347,7 @@ async function sendPrintRequest(target, printData, publicKey) {
 }
 
 // ── Build request data ──
-const target = "&lt;API key&gt;";
+const target = "&lt;printer ID&gt;";
 const publicKey = "MIIBIjANBgkqhkiG9w0BAQEFAAO...";
 const printData = {
     url: "https://example.com/document.pdf",
