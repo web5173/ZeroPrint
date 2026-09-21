@@ -1,32 +1,32 @@
 ﻿<!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>在线调试 — ZeroPrint</title>
-<meta name="description" content="如何测试 ZeroPrint 打印 API？使用在线调试工具输入接口地址、打印机 ID 和文件 URL，支持端到端加密，即可发送测试打印请求。">
-<meta property="og:title" content="在线调试 — ZeroPrint">
-<meta property="og:description" content="如何测试 ZeroPrint 打印 API？使用在线调试工具输入接口地址、打印机 ID 和文件 URL，支持端到端加密，即可发送测试打印请求。">
+<title>Playground — ZeroPrint</title>
+<meta name="description" content="How to test ZeroPrint print API? Use the online debug tool to enter your API endpoint, printer ID, and file URL with optional end-to-end encryption.">
+<meta property="og:title" content="Playground — ZeroPrint">
+<meta property="og:description" content="How to test ZeroPrint print API? Use the online debug tool to enter your API endpoint, printer ID, and file URL with optional end-to-end encryption.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://webappprint.cn/playground.html">
-<meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://webappprint.cn/favicon.png">
-<meta property="og:image:secure_url" content="https://webappprint.cn/favicon.png">
+<meta property="og:url" content="https://webappprint.com/playground.html">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://webappprint.com/favicon.png">
+<meta property="og:image:secure_url" content="https://webappprint.com/favicon.png">
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:alt" content="ZeroPrint">
 <meta property="og:site_name" content="ZeroPrint">
-<meta name="keywords" content="ZeroPrint调试,在线打印测试,打印API调试,HTTP打印测试,PrintNode alternative">
-<link rel="canonical" href="https://webappprint.cn/playground.html">
+<meta name="keywords" content="ZeroPrint playground,online print test,print API debug,HTTP print testing,PrintNode alternative">
+<link rel="canonical" href="https://webappprint.com/playground.html">
 <link rel="alternate" hreflang="zh-CN" href="https://webappprint.cn/playground.html">
 <link rel="alternate" hreflang="en" href="https://webappprint.com/playground.html">
 <link rel="alternate" hreflang="x-default" href="https://webappprint.com/playground.html">
 <link rel="icon" href="favicon.png" type="image/png">
 <link rel="stylesheet" href="style.css?v=2026081418">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebPage","name":"在线调试 — ZeroPrint","url":"https://webappprint.cn/playground.html","description":"如何测试 ZeroPrint 打印 API？使用在线调试工具输入接口地址、打印机 ID 和文件 URL，支持端到端加密，即可发送测试打印请求。","isPartOf":{"@type":"SoftwareApplication","name":"ZeroPrint","url":"https://webappprint.cn/"}}
+{"@context":"https://schema.org","@type":"WebPage","name":"Playground — ZeroPrint","url":"https://webappprint.com/playground.html","description":"How to test ZeroPrint print API? Use the online debug tool to enter your API endpoint, printer ID, and file URL with optional end-to-end encryption.","isPartOf":{"@type":"SoftwareApplication","name":"ZeroPrint","url":"https://webappprint.com/"}}
 </script>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"SoftwareApplication","name":"ZeroPrint 在线调试工具","url":"https://webappprint.cn/playground.html","description":"如何测试 ZeroPrint 打印 API？使用在线调试工具输入接口地址、打印机 ID 和文件 URL，支持端到端加密，即可发送测试打印请求。","applicationCategory":"DeveloperApplication","operatingSystem":"Web"}
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"ZeroPrint Playground","url":"https://webappprint.com/playground.html","description":"How to test ZeroPrint print API? Use the online debug tool to enter your API endpoint, printer ID, and file URL with optional end-to-end encryption.","applicationCategory":"DeveloperApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
 </script>
 <style>
 .pg-card{padding:0;margin-bottom:32px}
@@ -51,28 +51,19 @@
 @media(max-width:768px){.pg-grid-4{grid-template-columns:1fr 1fr}.pg-card{padding:0;margin-bottom:14px}}
 @media(max-width:480px){.pg-grid-2,.pg-grid-4{grid-template-columns:1fr}.pg-actions .btn{width:100%;justify-content:center}}
 </style>
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Organization","name":"ZeroPrint","url":"https://webappprint.cn/","logo":"https://webappprint.cn/favicon.png"}
-</script>
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebSite","name":"ZeroPrint","url":"https://webappprint.cn/"}
-</script>
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://webappprint.cn/"},{"@type":"ListItem","position":2,"name":"在线调试","item":"https://webappprint.cn/playground.html"}]}
-</script>
 </head>
 <body>
 
 <nav class="nav" id="nav"><div class="nav-inner">
 <a href="/" class="nav-logo">Zero<span>Print</span></a>
-<button class="nav-toggle" id="navToggle" aria-label="菜单"><span></span><span></span><span></span></button>
+<button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
 <ul class="nav-links" id="navLinks">
-<li><a href="/">首页</a></li>
-<li><a href="docs.html">接口文档</a></li>
-<li><a href="playground.html" class="active">在线调试</a></li>
-<li><a href="download.html">客户端下载</a></li>
-<li><a href="pricing.html">价格</a></li>
-<li><a href="contact.html">联系我们</a></li>
+<li><a href="/">Home</a></li>
+<li><a href="docs.html">API Docs</a></li>
+<li><a href="playground.html" class="active">Playground</a></li>
+<li><a href="download.html">Client Download</a></li>
+<li><a href="pricing.html">Pricing</a></li>
+<li><a href="contact.html">Contact</a></li>
 </ul>
 </div></nav>
 
@@ -81,58 +72,47 @@
 
 <div class="pg-card fade-up">
 <div class="pg-grid" style="gap:10px;">
-<div class="pg-field"><label for="apiEndpoint">接口地址 <span style="color:#ff5722">*</span></label><input type="text" id="apiEndpoint" value="https://webappprint.cn" placeholder="从客户端复制" autocomplete="off" spellcheck="false"></div>
+<div class="pg-field"><label for="apiEndpoint">Api Endpoint <span style="color:#ff5722">*</span></label><input type="text" id="apiEndpoint" value="https://print.pockethost.io" placeholder="Copy from client" autocomplete="off" spellcheck="false"></div>
 <div class="pg-grid pg-grid-2" style="gap:10px;">
-<div class="pg-field"><label for="printerId">打印机 ID <span style="color:#ff5722">*</span></label><input type="text" id="printerId" placeholder="从客户端复制" autocomplete="off" spellcheck="false"></div>
-<div class="pg-field"><label for="fileUrl">文件 URL <span style="color:#ff5722">*</span></label><input type="text" id="fileUrl" placeholder="https://example.com/document.pdf" autocomplete="off" spellcheck="false" value="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"></div>
+<div class="pg-field"><label for="printerId">Printer ID <span style="color:#ff5722">*</span></label><input type="text" id="printerId" placeholder="Copy from client" autocomplete="off" spellcheck="false"></div>
+<div class="pg-field"><label for="fileUrl">File URL <span style="color:#ff5722">*</span></label><input type="text" id="fileUrl" placeholder="https://example.com/document.pdf" autocomplete="off" spellcheck="false" value="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"></div>
 </div>
 </div>
 </div>
 
 <div class="pg-card fade-up">
 <div class="pg-grid pg-grid-4" style="gap:10px;">
-<div class="pg-field"><label for="copies">打印份数</label><input type="text" id="copies" placeholder="默认为 1" autocomplete="off" spellcheck="false"></div>
-<div class="pg-field"><label for="pageSize">纸张大小</label><input type="text" id="pageSize" placeholder="从客户端复制" autocomplete="off" spellcheck="false"></div>
-<div class="pg-field"><label for="duplex">双面打印</label><input type="text" id="duplex" placeholder="从客户端复制" autocomplete="off" spellcheck="false"></div>
-<div class="pg-field"><label for="color">颜色模式</label><input type="text" id="color" placeholder="从客户端复制" autocomplete="off" spellcheck="false"></div>
-<div class="pg-field"><label for="orientation">方向</label><input type="text" id="orientation" placeholder="从客户端复制" autocomplete="off" spellcheck="false"></div>
-<div class="pg-field"><label for="resolution">分辨率</label><input type="text" id="resolution" placeholder="从客户端复制" autocomplete="off" spellcheck="false"></div>
-<div class="pg-field"><label for="taskId">任务 ID</label><input type="text" id="taskId" placeholder="选填" autocomplete="off" spellcheck="false"></div>
-<div class="pg-field"><label for="callbackUrl">回调地址</label><input type="text" id="callbackUrl" placeholder="选填" autocomplete="off" spellcheck="false"></div>
+<div class="pg-field"><label for="copies">Copies</label><input type="text" id="copies" placeholder="Default: 1" autocomplete="off" spellcheck="false"></div>
+<div class="pg-field"><label for="pageSize">Page Size</label><input type="text" id="pageSize" placeholder="Copy from client" autocomplete="off" spellcheck="false"></div>
+<div class="pg-field"><label for="duplex">Duplex</label><input type="text" id="duplex" placeholder="Copy from client" autocomplete="off" spellcheck="false"></div>
+<div class="pg-field"><label for="color">Color</label><input type="text" id="color" placeholder="Copy from client" autocomplete="off" spellcheck="false"></div>
+<div class="pg-field"><label for="orientation">Orientation</label><input type="text" id="orientation" placeholder="Copy from client" autocomplete="off" spellcheck="false"></div>
+<div class="pg-field"><label for="resolution">Resolution</label><input type="text" id="resolution" placeholder="Copy from client" autocomplete="off" spellcheck="false"></div>
+<div class="pg-field"><label for="taskId">Task ID</label><input type="text" id="taskId" placeholder="Optional" autocomplete="off" spellcheck="false"></div>
+<div class="pg-field"><label for="callbackUrl">Callback URL</label><input type="text" id="callbackUrl" placeholder="Optional" autocomplete="off" spellcheck="false"></div>
 </div>
 </div>
 
 <div class="pg-card fade-up">
-<div class="pg-field"><label for="publicKey">公钥</label><textarea id="publicKey" placeholder="从客户端复制" spellcheck="false" rows="4"></textarea></div>
+<div class="pg-field"><label for="publicKey">Public Key</label><textarea id="publicKey" placeholder="Copy from client" spellcheck="false" rows="4"></textarea></div>
 </div>
 
 <div class="pg-actions fade-up">
-<button class="btn btn-accent" id="sendBtn">发送打印请求</button>
-<button class="btn btn-secondary" id="previewBtn">预览数据</button>
+<button class="btn btn-accent" id="sendBtn">Send Print Request</button>
+<button class="btn btn-secondary" id="previewBtn">Preview Data</button>
 </div>
 
 <div class="pg-result fade-up">
-<div><div class="pg-result-label">请求体<span class="pg-status info" id="reqStatus" style="display:none;"></span></div><pre class="pg-code empty" id="reqBody">// 请求体将显示在这里</pre></div>
-<div><div class="pg-result-label">响应<span class="pg-status info" id="resStatus">等待中</span></div><pre class="pg-code empty" id="resBody">// 发送后响应将显示在这里</pre></div>
+<div><div class="pg-result-label">Request Body<span class="pg-status info" id="reqStatus" style="display:none;"></span></div><pre class="pg-code empty" id="reqBody">// Request body will appear here</pre></div>
+<div><div class="pg-result-label">Response<span class="pg-status info" id="resStatus">waiting</span></div><pre class="pg-code empty" id="resBody">// Response will appear here after sending</pre></div>
 </div>
 
 </div></section></main>
 
-<footer>
-  <div class="footer-inner">
-    <div class="footer-left">
-      <span>&copy; 2026 ZeroPrint</span>
-      <span class="footer-icp"><a href="https://beian.miit.gov.cn/" target="_blank">晋ICP备2025066454号-3</a></span>
-      <a href="https://beian.mps.gov.cn/#/query/webSearch?code=14010702074721" rel="noreferrer" target="_blank" class="footer-police">
-        <img src="police-badge.png" alt="">晋公网安备14010702074721号
-      </a>
-    </div>
-    <div class="footer-links">
-      <a href="privacy.html">隐私声明</a>
-      <a href="contact.html">联系我们</a>
-    </div>
-  </div>
-</footer>
+<footer><div class="footer-inner">
+<span>&copy; 2026 ZeroPrint</span>
+<div class="footer-links"><a href="privacy.html">Privacy Policy</a><a href="contact.html">Contact</a></div>
+</div></footer>
 
 <script>
 const obs=new IntersectionObserver((e)=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('visible');obs.unobserve(x.target);}});},{threshold:.1});
@@ -181,9 +161,9 @@ function buildPrintData(){
 async function buildRequest(){
   const baseUrl=$('apiEndpoint').value.trim().replace(/\/+$/,'');
   const target=$('printerId').value.trim();
-  if(!baseUrl)throw new Error('请填写接口地址。');
-  if(!target)throw new Error('请填写打印机 ID。');
-  if(!$('fileUrl').value.trim())throw new Error('请填写文件 URL。');
+  if(!baseUrl)throw new Error('Api Endpoint is required.');
+  if(!target)throw new Error('Printer ID is required.');
+  if(!$('fileUrl').value.trim())throw new Error('File URL is required.');
   const printData=buildPrintData();
   const publicKey=$('publicKey').value.trim();
   const plaintext=JSON.stringify(printData);
@@ -192,35 +172,35 @@ async function buildRequest(){
 }
 
 function setReq(bodyText,statusText,statusCls){
-  if(!bodyText){reqBodyEl.textContent='// 请求体将显示在这里';reqBodyEl.classList.add('empty');}
+  if(!bodyText){reqBodyEl.textContent='// Request body will appear here';reqBodyEl.classList.add('empty');}
   else{reqBodyEl.textContent=bodyText;reqBodyEl.classList.remove('empty');}
   if(statusText){reqStatusEl.textContent=statusText;reqStatusEl.className='pg-status '+(statusCls||'info');reqStatusEl.style.display='';}
   else{reqStatusEl.style.display='none';}
 }
 function setRes(bodyText,statusText,statusCls){
-  if(!bodyText){resBodyEl.textContent='// 发送后响应将显示在这里';resBodyEl.classList.add('empty');}
+  if(!bodyText){resBodyEl.textContent='// Response will appear here after sending';resBodyEl.classList.add('empty');}
   else{resBodyEl.textContent=bodyText;resBodyEl.classList.remove('empty');}
-  resStatusEl.textContent=statusText||'等待中';
+  resStatusEl.textContent=statusText||'waiting';
   resStatusEl.className='pg-status '+(statusCls||'info');
 }
 
 $('previewBtn').addEventListener('click',async()=>{
-  try{const{body}=await buildRequest();setReq(JSON.stringify(body,null,2),'预览','info');setRes('','未发送','info');}
+  try{const{body}=await buildRequest();setReq(JSON.stringify(body,null,2),'preview','info');setRes('','not sent','info');}
   catch(err){setReq('','error','err');setRes(err.message,'error','err');}
 });
 
 $('sendBtn').addEventListener('click',async()=>{
-  const btn=$('sendBtn');const original=btn.textContent;btn.disabled=true;btn.textContent='发送中...';
+  const btn=$('sendBtn');const original=btn.textContent;btn.disabled=true;btn.textContent='Sending...';
   try{
     const{baseUrl,target,body}=await buildRequest();
-    setReq(JSON.stringify(body,null,2),'就绪','info');setRes('','发送中...','info');
+    setReq(JSON.stringify(body,null,2),'ready','info');setRes('','sending...','info');
     const publicKey=$('publicKey').value.trim();
     const printData=buildPrintData();
     await sendPrintRequest(baseUrl,target,printData,publicKey||null);
     setRes('{ "status": "success" }','200 OK','ok');
   }catch(err){
     const msg=(typeof err==='object'&&err.message)?err.message:(typeof err==='string'?err:JSON.stringify(err));
-    setRes(msg||'请求失败','error','err');
+    setRes(msg||'Request failed','error','err');
   }finally{btn.disabled=false;btn.textContent=original;}
 });
 </script>
