@@ -79,6 +79,11 @@ ul { list-style: none; }
   height: 1.5px; background: var(--accent); border-radius: 1px;
 }
 
+.faq-link {
+  color: var(--accent);
+  font-weight: 500;
+}
+
 /* Mobile toggle */
 .nav-toggle {
   display: none; flex-direction: column; gap: 5px;
