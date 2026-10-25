@@ -463,53 +463,6 @@ tbody tr:hover { background: var(--accent-soft); }
 .faq-item.open .faq-a { max-height: 300px; }
 .faq-a-inner { padding: 0 0 20px; font-size: 14px; color: var(--ink-2); line-height: 1.7; }
 
-/* ── Pricing ── */
-.pricing-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
-.price-card {
-  padding: 36px 28px; border: 1px solid var(--border); border-radius: 8px;
-  background: var(--surface); position: relative;
-  transition: border-color .2s, box-shadow .2s;
-  display: flex; flex-direction: column;
-}
-.price-card:hover { border-color: #ccc; box-shadow: 0 2px 20px rgba(0,0,0,.04); }
-.price-card.featured { border-color: var(--ink); box-shadow: 0 4px 32px rgba(0,0,0,.06); }
-.price-badge {
-  position: absolute; top: -11px; left: 28px;
-  background: var(--accent); color: #fff;
-  font-size: 11px; font-weight: 600; padding: 3px 12px;
-  border-radius: 3px; letter-spacing: .02em;
-}
-.price-card h3 { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
-.price-amount {
-  font-family: var(--font-en); font-size: 28px; font-weight: 600;
-  letter-spacing: -.02em; margin-bottom: 4px;
-  color: var(--ink);
-}
-.price-amount small { font-size: 14px; font-weight: 400; color: var(--ink-3); }
-.price-card.featured .price-amount { color: var(--accent); }
-.price-card.featured .price-amount small { font-size: 16px; }
-.price-card .subtitle { font-size: 13px; color: var(--ink-3); margin-bottom: 16px; }
-.promo-highlight {
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--accent);
-  line-height: 1.6;
-  margin-bottom: 24px;
-  letter-spacing: -.01em;
-}
-.price-note { font-size: 13.5px; color: var(--ink-2); margin-bottom: 24px; line-height: 1.65; }
-.price-features { list-style: none; margin-bottom: 28px; flex: 1; }
-.price-features li {
-  padding: 6px 0; font-size: 13.5px;
-  display: flex; align-items: center; gap: 10px;
-}
-.price-features li::before {
-  content: ''; width: 5px; height: 5px; border-radius: 50%;
-  background: var(--accent); flex-shrink: 0;
-}
-.price-features li strong { font-weight: 600; }
-.price-card .btn { margin-top: auto; }
-
 /* ── Footer ── */
 footer { border-top: 1px solid var(--border); padding: 36px 0; margin-top: 0; scroll-snap-align: start; }
 .footer-inner {
@@ -676,7 +629,7 @@ footer { border-top: 1px solid var(--border); padding: 36px 0; margin-top: 0; sc
   }
   .nav-links.open { display: flex; }
   .nav-toggle { display: flex; }
-  .cards-3, .pricing-grid { grid-template-columns: 1fr; }
+  .cards-3 { grid-template-columns: 1fr; }
   .cards-2 { grid-template-columns: 1fr; }
   .steps { flex-direction: column; gap: 32px; }
   .feature-row { grid-template-columns: 1fr; gap: 32px; }
@@ -707,7 +660,6 @@ footer { border-top: 1px solid var(--border); padding: 36px 0; margin-top: 0; sc
   .value-full-visual .feature-list { text-align: left; display: flex; flex-direction: column; gap: 10px; }
   .download-box { padding: 20px 16px; gap: 16px; }
   .page-header h1 { font-size: 28px; }
-  .promo-highlight { font-size: 13px; }
 }
 @media (max-width: 480px) {
   .hero-actions { flex-direction: column; }
